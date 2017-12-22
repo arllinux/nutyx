@@ -1,9 +1,8 @@
-# NuTyx
+NuTyx
 Howto for disto NuTyx
 
 This repository contains information on NuTyx distribution.
 Treated here version is 9.93.
-Repository being created.
 ---------------------------------------------------------------
 Ce dépôt contient les informations relatives à la distribution NuTyx.
 La version traité ici est la 9.93.

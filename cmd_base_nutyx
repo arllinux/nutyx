@@ -1,0 +1,24 @@
+# Post installation
+
+Renseigner les paquets disponibles à votre nouvelle installation.
+$ check
+[sudo] passord for utilisateur:
+
+Ajouter un utilisateur root
+$ adduser passwd root
+
+Ajouter le bureau Mate
+# get mate mate-extra
+
+Installer le gestionnaire de connection graphique
+# get lxdm
+
+Ajouter quelques logiciels
+# get firefox libreoffice thunderbird
+
+Pour vérifier si tout fonctionne bien :
+# reboot
+Au redémarrage nous sommes accueuilli par le gestionnaire lxdm
+
+# txt #
+

@@ -5,10 +5,14 @@ $ check
 [sudo] passord for utilisateur:
 
 Ajouter un utilisateur root
-$ adduser passwd root
+$ nu passwd root
 
 Ajouter le bureau Mate
 # get mate mate-extra
+
+Ajout de quelques outils 
+# get zip unzip xdg-user-dirs gvfs gvfs-smb alsa-utils ntfs-3g
+# get network-manager-applet
 
 Installer le gestionnaire de connection graphique
 # get lxdm

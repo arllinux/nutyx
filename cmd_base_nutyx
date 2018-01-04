@@ -1,28 +1,20 @@
 # Post installation
 # NuTyx 9.93
 Renseigner les paquets disponibles à votre nouvelle installation.
-$ check
+# check
 [sudo] passord for utilisateur:
 
+# sudo cards sync
+# sudo cards diff
+
 Ajouter un utilisateur root
-$ nu passwd root
+# nu passwd root
 
-Ajouter le bureau Mate
-# get mate mate-extra
+# cards install vim git
 
-Ajout de quelques outils 
-# get zip unzip xdg-user-dirs gvfs gvfs-smb alsa-utils ntfs-3g
-# get network-manager-applet
+Ensuite lancer le script que vous aurez récupéré par la commande :
+# git clone https://github.com/arllinux/nutyx
 
-Installer le gestionnaire de connection graphique
-# get lxdm
 
-Ajouter quelques logiciels
-# get firefox libreoffice thunderbird
-
-Pour vérifier si tout fonctionne bien :
-# reboot
-Au redémarrage nous sommes accueuilli par le gestionnaire lxdm
-
-# txt #
+# Fin #
 

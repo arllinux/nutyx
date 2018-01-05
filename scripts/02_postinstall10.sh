@@ -39,9 +39,9 @@ if [ $USER != "root" ]
    echo "================================================================"
    echo "                                                                "
    read -p ":: Votre choix (1 ou 2) :: " desk
-   echo " Vous avez 5 secondes pour arrêter !!!!!"
-   echo " En faisant la combinaison de touches  :"
-   echo " Ctrl + c .............................."
+   echo " Confirmez votre choix : Entrée pour valider :"
+   echo " Annuler avec la combinaison de touches      :"
+   read -p " Ctrl + c ...................................:"
    sleep 5
   if [ $desk = "1" ]
     then

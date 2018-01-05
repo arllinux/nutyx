@@ -1,0 +1,11 @@
+# Paquets supplémentaires à installer
+wget
+network-manager-applet
+dconf-editor
+alsa-utils
+gvfs
+xdg-user-dirs
+xfce4-elementary-icon-theme
+tar
+rsync
+gawk

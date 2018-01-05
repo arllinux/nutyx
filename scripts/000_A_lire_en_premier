@@ -1,0 +1,11 @@
+# 05 janvier 2018
+Avant de lancer les scripts :
+# cards install vim git
+
+Esuite exécuter les scripts dans l'ordre des numéros
+
+000_config_git.sh
+01_consoles.sh
+02_postinstall10.sh
+03_param_nutyx10.sh
+04_backbround_nutyx.sh

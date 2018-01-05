@@ -1,0 +1,39 @@
+# Création d'un second utilisateur
+# Liste des groupes installés dans le premier utilisateur
+
+La commande : nu ne fonctionne plus (ou pas). C'est la première fois que je
+crée un second utilisateur.
+
+# useradd toto
+
+# cat /etc/passwd
+(...)
+toto:x:1001:1001::/home/toto:/bin/bash
+(...)
+
+# passwd tata
+New password:
+Retype new password:
+passwd: password updated successfully
+
+# mkdir tata
+(...)
+drwxr-xr-x 1 root       root         0 janv.  5 03:35 tata
+(...)
+
+# chown -R tata:tata tata
+(...)
+drwxr-xr-x 1 tata       tata         0 janv.  5 03:35 tata
+(...)
+
+# groups tata
+tata : tata
+
+# usermod -a-G
+tty,floppy,disk,lp,audio,video,cdrom,adm,lpadmin,wheel,scanner,vboxusers,netdev,
+users tata
+
+# groups tata
+tata : tata tty floppy disk lp audio video cdrom adm lpadmin wheel scanner vboxusers netdev users
+
+---

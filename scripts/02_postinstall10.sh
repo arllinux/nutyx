@@ -10,57 +10,15 @@ if [ $USER != "root" ]
     then
         echo "Pour exécuter ce script il faut être l'utilisateur root !"
     else
-				echo "Choisissez l'environnement de Bureau que vous souhaitez :"
-				echo " Pour le bureau Mate : taper 1"
-				echo " Pour le bureau Xfce : taper 2"
-				echo " Pour le bureau Lxde : taper 3"
-				echo " Pour le bureau Kde  : taper 4"
-				echo " Pour le bureau Lxqt : taper 5"
-				echo " Pour le bureau openbox : taper 6"
-				echo " Pour le bureau enlightenment : taper 7"
-        read -p ":: Votre choix (1 à 7) :: " choix
-				echo " Vous avez 5 secondes pour arrêter !!!!!"
-				echo " En faisant la combinaison de touches :"
-				echo " Ctrl + c ............................."
-				sleep 5
-
- 		if [ $choix = "1" ]
- 		then
-					get mate mate-extra
- 		elif [ $choix = "2" ]
- 		then
-					get xfce4 xfce4-extra
- 		elif [ $choix = "3" ]
- 		then
-					get lxde lxde-extra
- 		elif [ $choix = "4" ]
- 		then
-					get kde5 kde5-extra
- 		elif [ $choix = "5" ]
- 		then
-					get lxqt lxqt-extra
- 		elif [ $choix = "6" ]
- 		then
-					get openbox
- 		else	
- 				[ $choix = "7" ]
-					get enlightenment
- 		fi
-
-
- 		echo "Installation du gestionnaire de démarrage"
-			sleep 3
-				get lxdm
  		
+    # Installer les paquets supplémentaires
  		echo "Installation de quelques outils"
-			sleep 3
-				get wget network-manager-applet dconf-editor alsa-utils gvfs
-				get xdg-user-dir xfce4-elementary-icon-theme tar sync gawk
+    echo ":: Ajout de paquets. ::"
+    PAQUETS=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets)
+    cards install $PAQUETS
 
  		echo "Fichier de conf du network manager"
-			sleep 3
 				cp $CWD/../network/network /etc/sysconfig/network
- 			# cp $CWD/../network/network_perso /etc/sysconfig/network
  			echo "==============================================================="
  			echo "==                   Choix des logiciels                    ==="
  			echo "==============================================================="
@@ -80,23 +38,30 @@ if [ $USER != "root" ]
  			echo "================================================================"
  			echo "================================================================"
  			echo "                                                                "
-       read -p ":: Votre choix (1 ou 2) :: " desk
+      read -p ":: Votre choix (1 ou 2) :: " desk
  			echo " Vous avez 5 secondes pour arrêter !!!!!"
  			echo " En faisant la combinaison de touches  :"
  			echo " Ctrl + c .............................."
 				sleep 5
- 		if [ $desk = "1" ]
+		if [ $desk = "1" ]
  		then
-				cards install libreoffice simple-scan firefox thunderbird
-				cards installtransmission amule gimp inkscape scribus darktable
-				cards install blender brasero vlc clementine geany filezilla
+    # Installer les paquets supplé
+ 		echo "Installation complète"
+    echo ":: Ajout de paquets. ::"
+    PAQUETS2=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets2)
+    cards install $PAQUETS2
+
  		else
-				cards install abiword gnumeric brasero vlc firefox thunderbird simple-scan
-			fi
-				echo "================================================================="
-				echo "===                 Installation terminée                     ==="
-				echo "===      Lancez les scripts pour personnaliser le bureau      ==="
-				echo "================================================================="
+    # Installer les paquets supplémentaires
+ 		echo "Installation de quelques outils"
+    echo ":: Ajout de paquets. ::"
+    PAQUETS3=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets3)
+    cards install $PAQUETS3
+		fi
+		echo "================================================================="
+		echo "===                 Installation terminée                     ==="
+		echo "===      Lancez les scripts pour personnaliser le bureau      ==="
+		echo "================================================================"
 fi
 
 exit 0

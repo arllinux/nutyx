@@ -1,6 +1,16 @@
 # Post installation
-# NuTyx 9.93
-Renseigner les paquets disponibles à votre nouvelle installation.
+# NuTyx 10rc
+#
+#
+Après la fin de l'installation automatisée
+L'invite de commande apparait : 
+
+On se connecte :
+login : jpantinoux
+Mot de passe :
+
+Synchroniser les dépots de paquets :
+
 # check
 [sudo] passord for utilisateur:
 

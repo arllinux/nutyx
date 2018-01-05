@@ -1,11 +1,12 @@
 # Paquets supplémentaires à installer
 # Environnement complet : paquets2
+# firefox, Thunderbird, mate, mate-extra sont intégré au 4 janvier 2018
 libreoffice
 simple-scan
-firefox
-thunderbird
+simplescreenrecorder
 transmission
 amule
+filezilla
 gimp
 inkscape
 scribus
@@ -15,5 +16,3 @@ brasero
 vlc
 clementine
 geany
-filezilla
-

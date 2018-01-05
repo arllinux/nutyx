@@ -28,7 +28,7 @@ if [ $USER != "root" ]
    echo "----------------------------------------------------"
    echo " LibreOffice, simple-scan, brasero, vlc, firefox, thunderbird,"
    echo " gimp, inkscape, scribus, darktable, blender, clementine, geany,"
-   echo " filezilla, transmission, amule ----------- Votre choix sera 1 :"
+   echo " filezilla, transmission ----------------- Votre choix sera 1 :"
    echo "==============================================================="
    echo "==============================================================="
    echo "Choisissez les outils pour un environnement léger :"

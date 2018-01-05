@@ -17,7 +17,7 @@ $ check
 Rentrer en root :
 # su -
 Mot de passe
-# cards sync
+
 # cards diff
 
 Si des paquets apparaisse à la suite de la commande "diff"

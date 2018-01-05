@@ -54,8 +54,8 @@ if [ $USER != "root" ]
  		
  		echo "Installation de quelques outils"
 			sleep 3
-				get wget network-manager-applet dconf-editor alsa-utils gvfs
-				get xdg-user-dir xfce4-elementary-icon-theme tar sync gawk
+				get wget network-manager-applet dconf-editor alsa-utils gvfs vim
+				get xdg-user-dir xfce4-elementary-icon-theme tar rsync gawk
 
  		echo "Fichier de conf du network manager"
 			sleep 3

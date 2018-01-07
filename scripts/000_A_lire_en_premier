@@ -24,7 +24,7 @@ Si des paquets apparaisse à la suite de la commande "diff"
 # cards upgrade
 
 Ajouter quelques outils indispensables
-# cards install vim git gawk
+# cards install vim git gawk wget tar
 
 Récupérer les scripts et la documentation : 
 # git clone http://github.com/arllinux/nutyx

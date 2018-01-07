@@ -1,0 +1,156 @@
+# Comment construire un paquet ?
+
+Cas concret : dans la Nutyx 10rc
+est installé Scribus 1.5.3
+Cette version à un bug pour le texte.
+
+Je la désinstalle et veut installer la 1.4.6
+en la compilant.
+
+Glossaire
+recette = Pkgfile
+
+Où se trouve les collections ?
+/usr/ports/perso/scribus
+		--> Pkgfile
+
+
+On commence .....
+
+Pour compiler dans un environnement isolé : chroot
+# vim /etc/cards.conf
+Ajouter en haut du fichier :
+dir /mnt/hd/usr/ports/perso
+...
+
+Installation de la chroot
+Pour la branche stable :
+# VERSION="stable" install-nytyx
+#
+# VERSION="development" install-nytyx
+
+Entrer dans la chroot
+# install-nutyx -ec
+
+# cards sync
+# get cards.devel
+
+Modifier le fichier /etc/cards.conf
+
+cat > /etc/cards.conf << EOF
+dir /usr/ports/perso
+dir /usr/ports/gui
+dir /usr/ports/cli
+dir /usr/ports/base
+logdir /var/log/pkgbuild
+base /usr/ports/base
+EOF
+
+
+
+Paramétrage du fichier /etc/pkgmk.conf
+
+cat > /etc/pkgmk.conf << EOF
+export CFLAGS="-O2 -pipe"
+export CXXFLAGS="\${CFLAGS}"
+case \${PKGMK_ARCH} in
+     "x86_64"|"")
+		  export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+		  ;;
+		 "i686")
+		  export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+      export CFLAGS="${CFLAGS} -m32"
+      export CXXFLAGS="${CXXFLAGS} -m32"
+		  export LDFLAGS="${LDFLAGS} -m32"
+		  ;;
+    *)
+      echo "Unknown architecture selected! Exiting."
+      exit 1
+      ;;
+esac
+PKGMK_SOURCE_DIR="/tmp"
+PKGMK_KEEP_SOURCES="yes"
+PKGMK_WORK_DIR="/tmp/work"
+PKGMK_IGNORE_REPO="no"
+PKGMK_IGNORE_COLLECTION="no"
+PKGMK_GROUPS=()
+PKGMK_LOCALES=()
+PKGMK_COMPRESS_PACKAGE="yes"
+PKGMK_COMPRESSION_MODE="xz"
+PKGMK_CLEAN="no"
+PKGMK_IGNORE_RUNTIMEDEPS="no"
+EOF
+
+
+Syncronisation des binaires via rsync
+
+$ sudo mkdir -p /usr/ports/perso/scribus
+
+Branche stable
+(A mettre dans un fichier et exécuter par ./xxxx)
+
+for i in base cli gui
+do
+	rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/stable/ \
+	/usr/ports/$i/
+done
+
+ou
+
+Branche development
+(A mettre dans un fichier et exécuter par ./xxxx)
+
+for i in base cli gui
+do
+	rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/ \
+	/usr/ports/$i/
+done
+
+#
+L'opération peut être longue
+#
+
+
+Création du dossier pour le nouveau paquet :
+mkdir /usr/ports/perso/scribus
+
+
+Créer un fichier Pkgfile
+
+$ echo '
+# Depends on: cmake boost aspell cups qt4 gnutls kerberos boost ghostscript lcms libxml2 cairo desktop-file-utils shared-mime-info
+
+description="Desktop publishing software"
+url="http://www.scribus.net"
+packager="pierre at nutyx dot org, tnut at nutyx dot org"
+name=scribus
+version=1.4.6
+release=1
+
+source=(http://downloads.sourceforge.net/$name/$name-$version.tar.xz)
+
+build() {
+	unset MAKEFLAGS
+	cd $SRC*
+
+	sed -i -e 's|#!/usr/bin/python|#!/usr/bin/python2|' \
+	       -e 's|#!/usr/bin/env python|#!/usr/bin/env python2|' \
+               scribus-$version/scribus/plugins/scriptplugin/{samples,scripts}/*
+
+	cd $name-$version
+	mkdir build
+	cd build
+	cmake ../ -DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_SKIP_RPATH=ON \
+	  	-DWANT_CAIRO=1 \
+                -DLIB_SUFFIX=""
+	make
+	make DESTDIR=$PKG install
+	install -Dm644 $SRC/$name-$version/scribus.desktop \
+	$PKG/usr/share/applications/scribus.desktop
+}' > /usr/ports/perso/scribus/Pkgfile
+
+
+Lancer la compilation et l'installation
+# cards create -r scribus
+

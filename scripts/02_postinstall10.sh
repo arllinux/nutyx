@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# 001_install_nutyx.sh
+# 02_postInstall10.sh
 # Jean-Pierre Antinoux - Janvier 2018
 
 CWD=$(pwd)

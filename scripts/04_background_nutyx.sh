@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# background_nutyx.sh
+# 04_background_nutyx.sh
 # 
 # Jean-Pierre Antinoux - Janvier 2018
 
@@ -22,6 +22,11 @@ if [ $USER != "root" ]
     chmod 0644 $WALDIR/perso/*.jpg
     chown root:root $WALDIR/perso/*.jpg
     cp $CWD/../wallpaper/perso.xml $WALXML/perso.xml
+
+		# Déplacer le fichier Wood.jpg vers "nature"
+		mv $CWD/perso/Wood.jpg $CWD/../nature/
+    chmod 0644 $WALDIR/nature/Wood.jpg
+
 fi
 
 exit 0

@@ -7,6 +7,8 @@
 CWD=$(pwd)
 WALXML="/usr/share/mate-background-properties"
 WALDIR="/usr/share/backgrounds/mate"
+WALDIR1="/usr/share/backgrounds/mate/perso"
+WALDIR2="/usr/share/backgrounds/mate/nature"
 
 # Vérification de la syntaxe de l'utilisateur principal
 if [ $USER != "root" ]
@@ -14,18 +16,18 @@ if [ $USER != "root" ]
     echo "Pour exécuter ce script il faut être l'utilisateur root !"
    else
     # Ranger les fonds d'écran à leur place
-    mkdir $WALDIR/perso
-    cd $WALDIR/perso
+    mkdir $WALDIR1
+    cd $WALDIR1
     wget http://sloteur.free.fr/arllinux/fonds_arllinux.tar.gz
     tar xvzf fonds_arllinux.tar.gz
     rm fonds_arllinux.tar.gz
-    chmod 0644 $WALDIR/perso/*.jpg
-    chown root:root $WALDIR/perso/*.jpg
+    chmod 0644 $WALDIR1/*.jpg
+    chown root:root $WALDIR1/*.jpg
     cp $CWD/../wallpaper/perso.xml $WALXML/perso.xml
 
 		# Déplacer le fichier Wood.jpg vers "nature"
-		mv $CWD/perso/Wood.jpg $CWD/../nature/
-    chmod 0644 $WALDIR/nature/Wood.jpg
+		mv $WALDIR1/Wood.jpg $WALDIR2
+    chmod 0644 $WALDIR2/Wood.jpg
 
 fi
 

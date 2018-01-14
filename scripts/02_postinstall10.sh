@@ -22,6 +22,10 @@ if [ $USER != "root" ]
    echo ":: Ajout de paquets. ::"
    PAQUETS=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets)
    cards install $PAQUETS
+   echo "==============================================================="
+   echo "==                 Les utilitaires de base                  ==="
+   echo "==                    ont été installés                     ==="
+   echo "==============================================================="
 
 	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
    echo "Fichier de conf du network manager"
@@ -52,7 +56,6 @@ if [ $USER != "root" ]
    echo " Confirmez votre choix : Entrée pour valider :"
    echo " Annuler avec la combinaison de touches      :"
    read -p " Ctrl + c ................................:"
-   sleep 5
   if [ $desk = "1" ]
     then
      # Installer les paquets supplémentaires

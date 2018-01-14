@@ -1,5 +1,4 @@
 # Paquets supplémentaires à installer
-wget
 network-manager-applet
 dconf-editor
 alsa-utils

@@ -11,6 +11,7 @@ if [ $USER != "root" ]
     then
         echo "Pour exécuter ce script il faut être l'utilisateur root !"
     else
+		# tester si le programme gawk est intallé, sinon le faire.
     # Vérification du nom d'utilisateur
     read -p 'Utilisateur (login) à personnaliser : ' nom
     while [ -z $nom ]; do

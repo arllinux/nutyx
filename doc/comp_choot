@@ -284,12 +284,37 @@ Le -r signifie qu'il va remettre le système de base à son état initial.
 Cela évite tout conflit avec une dépendance toujours possible.
 Système de base puis il recharge les binaires des dépences par rapport au paquet à installer
 
+Installer le paquet
+#============================
+# Warning le 14 janvier 2018
+#============================
+Normalement le paquet s'installe avec :
+$ get scribus
+bash: get: command not found
+
+
+Donc j'ai fait l'install avec :
+$ sudo cards install scribus
+Obtenir les infos sur les 1322 paquets: 100 %
+  AJOUTE: (perso) scribus 1.4.6-1, 3463 fichiers: 100 %
+post-installation: démarrée
+  /sbin/ldconfig -r /
+  /usr/bin/update-desktop-database -q usr/share/applications/
+  /usr/bin/update-mime-database -n usr/share/mime/
+post-installation: finie
+
+# Pour info
+# La compilation a duré un heure pour une archive compressée de :
+# 52M en tar.xz
+# L'archive se trouve dans le répertoire /mnt/hd/usr/ports/perso/scribus/
+total 52M
+-rw-rw-r-- 1 1000 1000 905 Jan 13 23:06 Pkgfile
+-rw-r--r-- 1 root root 52M Jan 14 00:50 scribus1515887575x86_64.cards.tar.xz
 
 
 Conclusion
 Les commandes à retenir sont:
 
-# cards config
 cards level
 cards base -r
 cards create -r

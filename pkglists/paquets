@@ -1,8 +1,6 @@
 # Paquets supplémentaires à installer
-network-manager-applet
 dconf-editor
 alsa-utils
-gvfs
 xdg-user-dirs
 xfce4-elementary-icon-theme
 tar

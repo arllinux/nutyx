@@ -63,7 +63,7 @@ CWD=$(pwd)
       echo ":: Ajout de paquets. ::"
       PAQUETS2=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets2)
       cards install $PAQUETS2
- 
+
      else
       # Installer les paquets supplémentaires
       echo "Installation de quelques outils"
@@ -71,14 +71,14 @@ CWD=$(pwd)
       PAQUETS3=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets3)
       cards install $PAQUETS3
     fi
- 
+
       # Supprimer les paquets non désirés
       echo "======================"
       echo "Suppression de paquets"
       echo "======================"
       PAQUETSSUPP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/sup_paquets)
       cards remove $PAQUETSSUPP
- 
+
     echo "================================================================="
     echo "===                 Installation terminée                     ==="
     echo "===      Lancez les scripts pour personnaliser le bureau      ==="

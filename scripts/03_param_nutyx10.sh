@@ -11,8 +11,8 @@ CWD=$(pwd)
 DCONF='dconf.tar.gz'
 MOZ='pref_firefox.tar.gz'
 THUN='pref-thunderbird.tar.gz'
-# SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
-SLO10rc='http://82.240.4.59/arllinux/nutyx10rc_0118'
+SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
+# SLO10rc='http://82.240.4.59/arllinux/nutyx10rc_0118'
 
 # Vérification de la syntaxe de l'utilisateur principal
     # Vérification du nom d'utilisateur

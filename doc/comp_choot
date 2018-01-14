@@ -254,6 +254,10 @@ Build date     : sam. 16 déc. 2017 00:33:12 CET
 Binary Url     : http://downloads.nutyx.org/x86_64/10.0-rc1/gui-extra
 Local Directory: /var/lib/pkg/depot/gui-extra
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Manque la commande pour la liste ci-dessous !!
+==============================================
 "chroot"
 Vérification : Il faut que cards voit tous les ports.
 Quand on lance la commande suivante il ne doit pas apparaître de "warning"
@@ -284,6 +288,7 @@ Le -r signifie qu'il va remettre le système de base à son état initial.
 Cela évite tout conflit avec une dépendance toujours possible.
 Système de base puis il recharge les binaires des dépences par rapport au paquet à installer
 
+"Machine hôte"
 Installer le paquet
 #============================
 # Warning le 14 janvier 2018

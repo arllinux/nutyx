@@ -311,6 +311,13 @@ total 52M
 -rw-rw-r-- 1 1000 1000 905 Jan 13 23:06 Pkgfile
 -rw-r--r-- 1 root root 52M Jan 14 00:50 scribus1515887575x86_64.cards.tar.xz
 
+On trouve le paquet installable dans le répertoire /tmp
+# Le paquet pèse environ 71M en tar.xz.
+root [ /tmp ]# ll
+total 71884
+-rw-r--r-- 1 root root 73601104 Jan 11  2016 scribus-1.4.6.tar.xz
+---xrwxrwx 1 root root      469 Jan 13 22:10 setup
+
 
 Conclusion
 Les commandes à retenir sont:

@@ -1,0 +1,71 @@
+#!/bin/bash
+
+CWD=$(pwd)
+# /root/nutyx/doc/chroot
+
+# Vérification de la syntaxe de l'utilisateur principal
+if [ $USER != "root" ]
+    then
+        echo "Pour exécuter ce script il faut être l'utilisateur root !"
+    else
+    # Adaptation du fichier /etc/cards.conf de la machine hôte pour avoir accès à :
+    # "Machine hôte"
+    cp /etc/cards.conf /etc/cards.conf.old
+    cat $CWD/cardsconf/cards.conf.chroot > /etc/cards.conf
+
+    # Afficher le résultat de la commande
+    cards config
+
+    echo "************************************************************"
+    echo " Si le résultat de la commande ne convient pas :  taper 1 : "
+    echo " Si le résultat de la commande vous convient deux choix   : "
+    echo " Installer une chroot pour version stable :       taper 2 : "
+    echo " Installer une chroot pour version development :  taper 3 : "
+    echo "************************************************************"
+    read -p" Taper votre choix : 1 - 2 ou 3 : " choix
+    echo "********************************"
+
+	if [ $choix = "1" ]
+		then
+			read -p "Vous quittez, Cio !!!"
+			exit
+	elif [ $choix = "2" ]
+		then
+      
+			# Version stable 
+			echo " **********************************************"
+			echo " Vous avez choisi d'installer une version STABLE"
+			echo " Si ce n'est pas le cas faites Ctrl + C"
+			echo " Si c'est votre choix, tapez Entrée :"
+      read -p"***********************************************"
+      VERSION="stable" install-nutyx
+      echo " *************************************"
+			echo " Vous aller installer une Nutyx STABLE"
+      read -p" ************************************"
+  		install-nutyx -ec
+  elif [ $choix = "3" ]
+    then  
+		
+			# Version development
+      echo " ***************************************************"
+			echo "Vous avez choisi d'installer la version DEVELOPMENT"
+			echo " Si ce n'est pas le cas faites Ctrl + C"
+			echo " Si c'est votre choix, tapez Entrée :"
+      read -p" **************************************************"
+      VERSION="development" install-nutyx
+      echo " ***********************************************"
+			echo " Vous aller installer une Nutyx de DEVELOPEMENT"
+      read -p" **********************************************"
+			install-nutyx -ec
+	else
+		
+			echo " **********************************************"
+			echo " Votre saisie ne correspond à aucun des choix  "
+		  echo " Appyez sur Entrée et recommencez"
+      read -p "***********************************************"
+		exit
+	fi
+  # Installer une Nutyx dans la chroot
+fi
+
+exit 0

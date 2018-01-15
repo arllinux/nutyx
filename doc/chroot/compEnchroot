@@ -1,0 +1,218 @@
+#!/bin/bash
+
+# Compiler en chroot dans la NuTyx
+
+# Penser à faire sur la machine hôte
+
+# "Machine hôte"
+# Adaptation du fichier /etc/cards.conf de la machine hôte pour avoir accès à :
+# # From my chroot
+# dir /mnt/hd/usr/ports/perso
+# dir /mnt/hd/usr/ports/gui
+# dir /mnt/hd/usr/ports/cli
+# dir /mnt/hd/usr/ports/base
+# #
+# # vim /etc/cards.config
+# 
+# ## For a minimal graphical interface
+# # dir /var/lib/pkg/depot/gui|http://downloads.nutyx.org
+# #
+# ## For all the console applications
+# dir /var/lib/pkg/depot/cli-extra|http://downloads.nutyx.org
+# #
+# ## For a minimal console interface
+# # dir /var/lib/pkg/depot/cli|http://downloads.nutyx.org
+# #
+# ## Chroot system without reboot possibilities for a chroot
+# # dir /var/lib/pkg/depot/base|http://downloads.nutyx.org
+# 
+# 
+# "Machine hôte"
+# # cards config
+
+
+VERSION="stable" install-nutyx
+
+#****************************************************
+#      Installation of NuTyX stable installed
+#      in /mnt/hd sucessfully
+#****************************************************
+
+VERSION="development" install-nutyx
+
+#****************************************************
+#      Installation of NuTyX development installed
+#      in /mnt/hd sucessfully
+#****************************************************
+
+
+# Entrer dans la chroot
+
+install-nutyx -ec
+get cards.devel
+
+# Adapter le fichier /etc/cards.conf
+cat >/etc/cards.conf << EOF
+dir /usr/ports/perso
+dir /usr/ports/gui
+dir /usr/ports/cli
+dir /usr/ports/base
+logdir /var/log/pkgbuild
+base /usr/ports/base
+EOF
+
+# Adpater le fichier /etc/pkgmk.conf
+cat > /etc/pkgmk.conf << EOF
+export CFLAGS="-O2 -pipe"
+export CXXFLAGS="\${CFLAGS}"
+case \${PKGMK_ARCH} in
+    "x86_64"|"")
+       export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+       ;;
+    "i686")
+       export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+       export CFLAGS="${CFLAGS} -m32"
+       export CXXFLAGS="${CXXFLAGS} -m32"
+       export LDFLAGS="${LDFLAGS} -m32"
+       ;;
+    *)
+       echo "Unknown architecture selected! Exiting."
+       exit 1
+       ;;
+esac
+PKGMK_SOURCE_DIR="/tmp"
+PKGMK_KEEP_SOURCES="yes"
+PKGMK_WORK_DIR="/tmp/work"
+PKGMK_IGNORE_REPO="no"
+PKGMK_IGNORE_COLLECTION="no"
+PKGMK_GROUPS=()
+PKGMK_LOCALES=()
+PKGMK_COMPRESS_PACKAGE="yes"
+PKGMK_COMPRESSION_MODE="xz"
+PKGMK_CLEAN="no"
+PKGMK_IGNORE_RUNTIMEDEPS="no"
+EOF
+
+# Synchronisation des binaires via rsync
+# La branche stable
+
+# La branche development 
+mkdir /usr/ports/perso
+
+for i in base cli gui
+ do
+   rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/$i/ \
+ /usr/ports/$i/
+done
+
+# "Machine hôte"
+# Je déplace le répertoire "scribus" dans la chroot
+# # sudo cp -av Documents/scribus/* /mnt/hd/usr/ports/perso/
+# 'scribus' -> '/mnt/hd/usr/ports/perso/scribus'
+# 'scribus/Pkgfile' -> '/mnt/hd/usr/ports/perso/scribus/Pkgfile'
+
+
+# Vérification de la disponibilité des ports sur la machine "hôte"
+# Avec l'option "-p" pour "ports"
+# puis
+# Vérification de la disponibilité des ports sur le serveur
+# Avec l'option "-b" pour binaire
+# 
+# "Machine hôte"
+# Vérification de la disponibilité des ports sur la machine "hôte"
+# $ cards info -p scribus
+# Name           : scribus
+# Description    : "Desktop publishing software"
+# URL            : "http://www.scribus.net"
+# Version        : 1.4.6
+# Release        : 1
+# Maintainer     : 
+# Contributors   : 
+# Packager       : "pierre at nutyx dot org, tnut at nutyx dot org"
+# Date of Pkgfile: dim. 14 janv. 2018 00:06:15 CET
+# Local Directory: /mnt/hd/usr/ports/perso
+# 
+# 
+# "Machine hôte"
+# Vérification de la disponibilité des ports sur le serveur
+# $ cards info -b scribus
+# Name           : scribus
+# Alias          : 
+# Description    : Desktop publishing software
+# Group          : doc man scribus 
+# URL            : http://www.scribus.net
+# Version        : 1.5.3
+# Release        : 3
+# Maintainer     : n.a.
+# Contributors   : Pierre B
+# Packager       : tnut <tnut@nutyx.org>
+# Build date     : sam. 16 déc. 2017 00:33:12 CET
+# Binary Url     : http://downloads.nutyx.org/x86_64/10.0-rc1/gui-extra
+# Local Directory: /var/lib/pkg/depot/gui-extra
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Manque la commande pour la liste ci-dessous !!
+# ==============================================
+# "chroot"
+# Vérification : Il faut que cards voit tous les ports.
+# Quand on lance la commande suivante il ne doit pas apparaître de "warning"
+# (...)
+# (...)
+# (...)
+# 23: /usr/ports/gui/breeze-icons
+# 23: /usr/ports/gui/kguiaddons
+# 23: /usr/ports/gui/kidletime
+# 23: /usr/ports/gui/kwayland
+# 23: /usr/ports/gui/kwindowsystem
+# 23: /usr/ports/gui/oxygen-icons5
+# 23: /usr/ports/gui/qtwebengine
+# 23: /usr/ports/gui/qtwebkit
+# 23: /usr/ports/gui/solid
+# 24: /usr/ports/gui/libkscreen
+
+
+# Paquets de ma collection "perso"
+cards level | grep perso
+# 20: /usr/ports/perso/scribus
+
+
+# Compilation et installation de votre paquet
+cards create -r scribus
+
+# Installer le paquet
+sudo cards install scribus
+
+
+# ==============
+# Attention !!!
+# ==============
+# 
+# "Machine hôte"
+# Penser à commenter sur la machine "hôte"
+# Les dépôts dans la chroot
+# et décommenter les lignes concernant le serveur
+# dans le fichier "cards.conf"
+# 
+# 
+# # From my chroot
+# # dir /mnt/hd/usr/ports/perso
+# # dir /mnt/hd/usr/ports/gui
+# # dir /mnt/hd/usr/ports/cli
+# # dir /mnt/hd/usr/ports/base
+# # ...
+# #
+# ## For a minimal graphical interface
+# dir /var/lib/pkg/depot/gui|http://downloads.nutyx.org
+# #
+# ## For all the console applications
+# dir /var/lib/pkg/depot/cli-extra|http://downloads.nutyx.org
+# #
+# ## For a minimal console interface
+# dir /var/lib/pkg/depot/cli|http://downloads.nutyx.org
+# #
+# ## Chroot system without reboot possibilities for a chroot
+# dir /var/lib/pkg/depot/base|http://downloads.nutyx.org
+
+
+# --- Fin ---

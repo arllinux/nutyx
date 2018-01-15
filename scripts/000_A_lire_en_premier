@@ -36,11 +36,8 @@ Ensuite exécuter les scripts dans l'ordre des numéros
 # ./000_config_git.sh
 # ./01_consoles.sh
 # ./02_postinstall10.sh
-# ./03_param_nutyx10.sh
-# ./04_backbround_nutyx.sh
-
-Ajouter le bouton "Éteindre" en haut à droite
-Ajouter le bouton "Forcer à quitter"
+# ./03_backbround_nutyx.sh
+# ./04_param_nutyx10.sh
 
 On éteind et on redémarre
 

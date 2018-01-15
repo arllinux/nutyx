@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Installation des outils de d√©veloppement
-get cards.devel
+# get cards.devel
 
 # Les fichiers de configuration
 # /etc/cards.conf
@@ -68,7 +68,7 @@ elif [ $choix = "2" ]
   echo " **********************************************"
   echo " Vous avez choisi d'installer une version STABLE"
   echo " Si ce n'est pas le cas faites Ctrl + C"
-  echo " Si c'est votre choix, tapez Entr√©e :"
+  echo " Si c'est votre choix, tapez EntrÈe :"
   read -p"***********************************************"
   # Cr√er le dossie racine  
   mkdir /usr/ports/perso
@@ -89,9 +89,9 @@ elif [ $choix = "3" ]
   echo " ***************************************************"
   echo " Vous avez choisi d'installer la version DEVELOPMENT"
   echo " Si ce n'est pas le cas faites Ctrl + C"
-  echo " Si c'est votre choix, tapez Entr√©e :"
+  echo " Si c'est votre choix, tapez EntrÈe :"
   read -p"***********************************************"
-  # Cr√er le dossie racine  
+  # CrÈer le dossie racine  
   mkdir /usr/ports/perso
   
   # Synchronisation des binaires via rsync

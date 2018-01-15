@@ -151,10 +151,8 @@ done
 # Local Directory: /var/lib/pkg/depot/gui-extra
 
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# Manque la commande pour la liste ci-dessous !!
-# ==============================================
 # "chroot"
+# $ cards level
 # Vérification : Il faut que cards voit tous les ports.
 # Quand on lance la commande suivante il ne doit pas apparaître de "warning"
 # (...)

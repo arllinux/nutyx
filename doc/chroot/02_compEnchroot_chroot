@@ -1,118 +1,11 @@
-# Compiler en chroot dans la NuTyx
-Sommaire
+#!/bin/bash
 
-Installation de la chroot
-    La branche stable
-    La branche development 
-Entrer dans la chroot
-Installation des outils de développement
-Les fichiers de configuration
-    /etc/cards.conf
-    /etc/pkgmk.conf 
-Synchronisation des binaires via rsync
-    La branche stable
-    La branche development 
-Compilation et installation de votre paquet
-Conclusion 
+#Installation des outils de développement
+get cards.devel
 
-
-
-Dans cet exemple je vais construire le paquet scribus 1.4.6
-Je suis dans la 10rc et le paquet 1.5.3 a un bug.
-J'ai donc désinstallé Scribus 1.5.3
-
-
-"Machine hôte"
-Adaptation du fichier /etc/cards.conf de la machine hôte pour avoir accès à :
-# From my chroot
-dir /mnt/hd/usr/ports/perso
-dir /mnt/hd/usr/ports/gui
-dir /mnt/hd/usr/ports/cli
-dir /mnt/hd/usr/ports/base
-
-"Machine hôte"
-Commenter les lignes : gui, cli, base
-# vim /etc/cards.config
-
-## For a minimal graphical interface
-# dir /var/lib/pkg/depot/gui|http://downloads.nutyx.org
-#
-## For all the console applications
-dir /var/lib/pkg/depot/cli-extra|http://downloads.nutyx.org
-#
-## For a minimal console interface
-# dir /var/lib/pkg/depot/cli|http://downloads.nutyx.org
-#
-## Chroot system without reboot possibilities for a chroot
-# dir /var/lib/pkg/depot/base|http://downloads.nutyx.org
-
-
-"Machine hôte"
-# cards config
-
-1 Dossier:  /mnt/hd/usr/ports/perso
-2 Dossier:  /mnt/hd/usr/ports/gui
-3 Dossier:  /mnt/hd/usr/ports/cli
-4 Dossier:  /mnt/hd/usr/ports/base
-5 Dossier:  /var/lib/pkg/depot/lxqt-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/lxqt-extra
-6 Dossier:  /var/lib/pkg/depot/lxqt depuis http://downloads.nutyx.org/x86_64/10.0-rc1/lxqt
-7 Dossier:  /var/lib/pkg/depot/lxde-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/lxde-extra
-8 Dossier:  /var/lib/pkg/depot/lxde depuis http://downloads.nutyx.org/x86_64/10.0-rc1/lxde
-9 Dossier:  /var/lib/pkg/depot/gnome-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/gnome-extra
-10 Dossier:  /var/lib/pkg/depot/gnome depuis http://downloads.nutyx.org/x86_64/10.0-rc1/gnome
-11 Dossier:  /var/lib/pkg/depot/mate-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/mate-extra
-12 Dossier:  /var/lib/pkg/depot/mate depuis http://downloads.nutyx.org/x86_64/10.0-rc1/mate
-13 Dossier:  /var/lib/pkg/depot/kde5-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/kde5-extra
-14 Dossier:  /var/lib/pkg/depot/kde5 depuis http://downloads.nutyx.org/x86_64/10.0-rc1/kde5
-15 Dossier:  /var/lib/pkg/depot/xfce4-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/xfce4-extra
-16 Dossier:  /var/lib/pkg/depot/xfce4 depuis http://downloads.nutyx.org/x86_64/10.0-rc1/xfce4
-17 Dossier:  /var/lib/pkg/depot/gui-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/gui-extra
-18 Dossier:  /var/lib/pkg/depot/cli-extra depuis http://downloads.nutyx.org/x86_64/10.0-rc1/cli-extra
-Liste des dossiers pour le système de base: /var/lib/pkg/depot/base
-Binaires : x86_64
-Locale   : fr
-
-
-
-"Machine hôte"
-Installation de la chroot
-		La branche stable
-    # VERSION="stable" install-nutyx
-
-****************************************************
-      Installation of NuTyX stable installed
-      in /mnt/hd sucessfully
-****************************************************
-
-		La branche development
-    # VERSION="development" install-nutyx
-		post-install: finish
-
-****************************************************
-      Installation of NuTyX development installed
-      in /mnt/hd sucessfully
-****************************************************
-
-
-Entrer dans la chroot
-
-[root@nutyx:~] # install-nutyx -ec
-
-******************************
-Chroot path: /mnt/hd
-******************************
-"chroot"
-root [ / ]# 
-
-Installation des outils de développement
-# get cards.devel
-
-Les fichiers de configuration
-
-"chroot"
-/etc/cards.conf
-
-root [ / ]# cat >/etc/cards.conf << EOF
+# Les fichiers de configuration
+# /etc/cards.conf
+cat >/etc/cards.conf << EOF
 dir /usr/ports/perso
 dir /usr/ports/gui
 dir /usr/ports/cli
@@ -121,10 +14,9 @@ logdir /var/log/pkgbuild
 base /usr/ports/base
 EOF
 
-"chroot"
-/etc/pkgmk.conf
-
-root [ / ]# cat > /etc/pkgmk.conf << EOF
+# Les fichiers de configuration
+# /etc/pkgmk.conf
+cat > /etc/pkgmk.conf << EOF
 export CFLAGS="-O2 -pipe"
 export CXXFLAGS="\${CFLAGS}"
 case \${PKGMK_ARCH} in
@@ -156,211 +48,71 @@ PKGMK_IGNORE_RUNTIMEDEPS="no"
 EOF
 
 
-Synchronisation des binaires via rsync
+echo "******************************************"
+echo " Synchronisation des binaires via rsync : "
+echo " Pour quitter   ==========> taper 1 : "
+echo " Branche STABLE ==========> taper 2 : "
+echo " Branche DEVELOPMENT =====> taper 3 : "
+echo "******************************************"
+read -p" Taper votre choix : 1 - 2 ou 3 : " choix
+echo "******************************************"
 
-    La branche stable
-    La branche development 
-"chroot"
-# mkdir /usr/ports/perso
- for i in base cli gui
-  do
-    rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/$i/ \
-  /usr/ports/$i/
+# Abandon de la commande
+if [ $choix = "1" ]
+  then
+   exit
+elif [ $choix = "2" ]
+  then
+  
+  # Version stable 
+  echo " **********************************************"
+  echo " Vous avez choisi d'installer une version STABLE"
+  echo " Si ce n'est pas le cas faites Ctrl + C"
+  echo " Si c'est votre choix, tapez Entrée :"
+  read -p"***********************************************"
+  # Cr�er le dossie racine  
+  mkdir /usr/ports/perso
+  
+  # Synchronisation des binaires via rsync
+  # La branche stable
+  #
+  for i in base cli gui
+   do
+     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/stable/$i/ \
+   /usr/ports/$i/
+  done
+  
+elif [ $choix = "3" ]
+  then  
+    	
+  # Version development
+  echo " ***************************************************"
+  echo " Vous avez choisi d'installer la version DEVELOPMENT"
+  echo " Si ce n'est pas le cas faites Ctrl + C"
+  echo " Si c'est votre choix, tapez Entrée :"
+  read -p"***********************************************"
+  # Cr�er le dossie racine  
+  mkdir /usr/ports/perso
+  
+  # Synchronisation des binaires via rsync
+  # La branche development 
+  #
+  for i in base cli gui
+   do
+     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/$i/ \
+   /usr/ports/$i/
   done
 
+else
+        
+  echo " **********************************************"
+  echo " Votre saisie ne correspond à aucun des choix  "
+  echo " Appyez sur Entrée et recommencez"
+  read -p "***********************************************"
+  exit
+fi
+exit 0
 
-"Machine hôte"
-J'ai préparé en amont dans la machine hôte un fichier texte qui contient la recette de scribus 1.4.6
-Dans le répertoire /home/jpantinoux/Documents/scribus/
-Ce répertoire contient un fichier texte :
-J'ai fait un copier du contenu récupéré sur le site NuTyx de Scribus 1.4.6
-Le fichier se nomme simplement "Pkgfile"
-Contenu du fichier :
-
-# Depends on: cmake boost aspell cups qt4 gnutls kerberos boost ghostscript lcms libxml2 cairo desktop-file-utils shared-mime-info
-
-description="Desktop publishing software"
-url="http://www.scribus.net"
-packager="pierre at nutyx dot org, tnut at nutyx dot org"
-name=scribus
-version=1.4.6
-release=1
-
-source=(http://downloads.sourceforge.net/$name/$name-$version.tar.xz)
-
-build() {
-	unset MAKEFLAGS
-	cd $SRC*
-
-	sed -i -e 's|#!/usr/bin/python|#!/usr/bin/python2|' \
-	       -e 's|#!/usr/bin/env python|#!/usr/bin/env python2|' \
-               scribus-$version/scribus/plugins/scriptplugin/{samples,scripts}/*
-
-	cd $name-$version
-	mkdir build
-	cd build
-	cmake ../ -DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_SKIP_RPATH=ON \
-	  	-DWANT_CAIRO=1 \
-                -DLIB_SUFFIX=""
-	make
-	make DESTDIR=$PKG install
-	install -Dm644 $SRC/$name-$version/scribus.desktop \
-	$PKG/usr/share/applications/scribus.desktop
-}
-
-"Machine hôte"
-Je déplace le répertoire "scribus" dans la chroot
-# sudo cp -av Documents/scribus/* /mnt/hd/usr/ports/perso/
-'scribus' -> '/mnt/hd/usr/ports/perso/scribus'
-'scribus/Pkgfile' -> '/mnt/hd/usr/ports/perso/scribus/Pkgfile'
+# Retour a la machine hote
 
 
-Vérification de la disponibilité des ports sur la machine "hôte"
-Avec l'option "-p" pour "ports"
-puis
-Vérification de la disponibilité des ports sur le serveur
-Avec l'option "-b" pour binaire
-
-"Machine hôte"
-Vérification de la disponibilité des ports sur la machine "hôte"
-$ cards info -p scribus
-Name           : scribus
-Description    : "Desktop publishing software"
-URL            : "http://www.scribus.net"
-Version        : 1.4.6
-Release        : 1
-Maintainer     : 
-Contributors   : 
-Packager       : "pierre at nutyx dot org, tnut at nutyx dot org"
-Date of Pkgfile: dim. 14 janv. 2018 00:06:15 CET
-Local Directory: /mnt/hd/usr/ports/perso
-
-
-"Machine hôte"
-Vérification de la disponibilité des ports sur le serveur
-$ cards info -b scribus
-Name           : scribus
-Alias          : 
-Description    : Desktop publishing software
-Group          : doc man scribus 
-URL            : http://www.scribus.net
-Version        : 1.5.3
-Release        : 3
-Maintainer     : n.a.
-Contributors   : Pierre B
-Packager       : tnut <tnut@nutyx.org>
-Build date     : sam. 16 déc. 2017 00:33:12 CET
-Binary Url     : http://downloads.nutyx.org/x86_64/10.0-rc1/gui-extra
-Local Directory: /var/lib/pkg/depot/gui-extra
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Manque la commande pour la liste ci-dessous !!
-==============================================
-"chroot"
-Vérification : Il faut que cards voit tous les ports.
-Quand on lance la commande suivante il ne doit pas apparaître de "warning"
-(...)
-(...)
-(...)
-23: /usr/ports/gui/breeze-icons
-23: /usr/ports/gui/kguiaddons
-23: /usr/ports/gui/kidletime
-23: /usr/ports/gui/kwayland
-23: /usr/ports/gui/kwindowsystem
-23: /usr/ports/gui/oxygen-icons5
-23: /usr/ports/gui/qtwebengine
-23: /usr/ports/gui/qtwebkit
-23: /usr/ports/gui/solid
-24: /usr/ports/gui/libkscreen
-
-
-"chroot"
-Paquets de ma collection "perso"
-# cards level | grep perso
-20: /usr/ports/perso/scribus
-
-
-Compilation et installation de votre paquet
-# cards create -r scribus
-Le -r signifie qu'il va remettre le système de base à son état initial.
-Cela évite tout conflit avec une dépendance toujours possible.
-Système de base puis il recharge les binaires des dépences par rapport au paquet à installer
-
-"Machine hôte"
-Installer le paquet
-#============================
-# Warning le 14 janvier 2018
-#============================
-Normalement le paquet s'installe avec :
-$ get scribus
-bash: get: command not found
-
-
-Donc j'ai fait l'install avec :
-$ sudo cards install scribus
-Obtenir les infos sur les 1322 paquets: 100 %
-  AJOUTE: (perso) scribus 1.4.6-1, 3463 fichiers: 100 %
-post-installation: démarrée
-  /sbin/ldconfig -r /
-  /usr/bin/update-desktop-database -q usr/share/applications/
-  /usr/bin/update-mime-database -n usr/share/mime/
-post-installation: finie
-
-# Pour info
-# La compilation a duré un heure pour une archive compressée de :
-# 52M en tar.xz
-# L'archive se trouve dans le répertoire /mnt/hd/usr/ports/perso/scribus/
-total 52M
--rw-rw-r-- 1 1000 1000 905 Jan 13 23:06 Pkgfile
--rw-r--r-- 1 root root 52M Jan 14 00:50 scribus1515887575x86_64.cards.tar.xz
-
-On trouve le paquet installable dans le répertoire /tmp
-# Le paquet pèse environ 71M en tar.xz.
-root [ /tmp ]# ll
-total 71884
--rw-r--r-- 1 root root 73601104 Jan 11  2016 scribus-1.4.6.tar.xz
----xrwxrwx 1 root root      469 Jan 13 22:10 setup
-
-
-Conclusion
-Les commandes à retenir sont:
-
-cards level
-cards base -r
-cards create -r
-
-
-==============
-Attention !!!
-==============
-
-"Machine hôte"
-Penser à commenter sur la machine "hôte"
-Les dépôts dans la chroot
-et décommenter les lignes concernant le serveur
-dans le fichier "cards.conf"
-
-
-# From my chroot
-# dir /mnt/hd/usr/ports/perso
-# dir /mnt/hd/usr/ports/gui
-# dir /mnt/hd/usr/ports/cli
-# dir /mnt/hd/usr/ports/base
-# ...
-#
-## For a minimal graphical interface
-dir /var/lib/pkg/depot/gui|http://downloads.nutyx.org
-#
-## For all the console applications
-dir /var/lib/pkg/depot/cli-extra|http://downloads.nutyx.org
-#
-## For a minimal console interface
-dir /var/lib/pkg/depot/cli|http://downloads.nutyx.org
-#
-## Chroot system without reboot possibilities for a chroot
-dir /var/lib/pkg/depot/base|http://downloads.nutyx.org
-
-
-# --- Fin ---

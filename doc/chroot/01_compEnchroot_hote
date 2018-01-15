@@ -24,48 +24,49 @@ if [ $USER != "root" ]
     echo "************************************************************"
     read -p" Taper votre choix : 1 - 2 ou 3 : " choix
     echo "********************************"
-
-	if [ $choix = "1" ]
-		then
-			read -p "Vous quittez, Cio !!!"
-			exit
-	elif [ $choix = "2" ]
-		then
+    
+    # Abandon de la commande
+    if [ $choix = "1" ]
+      then
+       mv /etc/cards.conf.old /etc/cards.conf 
+       exit
+    elif [ $choix = "2" ]
+      then
       
-			# Version stable 
-			echo " **********************************************"
-			echo " Vous avez choisi d'installer une version STABLE"
-			echo " Si ce n'est pas le cas faites Ctrl + C"
-			echo " Si c'est votre choix, tapez Entrée :"
-      read -p"***********************************************"
-      VERSION="stable" install-nutyx
-      echo " *************************************"
-			echo " Vous aller installer une Nutyx STABLE"
-      read -p" ************************************"
-  		install-nutyx -ec
-  elif [ $choix = "3" ]
-    then  
+    # Version stable 
+    echo " **********************************************"
+    echo " Vous avez choisi d'installer une version STABLE"
+    echo " Si ce n'est pas le cas faites Ctrl + C"
+    echo " Si c'est votre choix, tapez Entrée :"
+    read -p"***********************************************"
+    VERSION="stable" install-nutyx
+    echo " *************************************"
+    echo " Vous aller installer une Nutyx STABLE"
+    read -p" ************************************"
+    install-nutyx -ec
+    elif [ $choix = "3" ]
+      then  
 		
-			# Version development
-      echo " ***************************************************"
-			echo "Vous avez choisi d'installer la version DEVELOPMENT"
-			echo " Si ce n'est pas le cas faites Ctrl + C"
-			echo " Si c'est votre choix, tapez Entrée :"
-      read -p" **************************************************"
-      VERSION="development" install-nutyx
-      echo " ***********************************************"
-			echo " Vous aller installer une Nutyx de DEVELOPEMENT"
-      read -p" **********************************************"
-			install-nutyx -ec
-	else
-		
-			echo " **********************************************"
-			echo " Votre saisie ne correspond à aucun des choix  "
-		  echo " Appyez sur Entrée et recommencez"
-      read -p "***********************************************"
-		exit
-	fi
-  # Installer une Nutyx dans la chroot
+    # Version development
+    echo " ***************************************************"
+    echo "Vous avez choisi d'installer la version DEVELOPMENT"
+    echo " Si ce n'est pas le cas faites Ctrl + C"
+    echo " Si c'est votre choix, tapez Entrée :"
+    read -p" **************************************************"
+    VERSION="development" install-nutyx
+    echo " ***********************************************"
+    echo " Vous aller installer une Nutyx de DEVELOPEMENT"
+    read -p" **********************************************"
+    install-nutyx -ec
+    else
+	    
+    echo " **********************************************"
+    echo " Votre saisie ne correspond à aucun des choix  "
+    echo " Appyez sur Entrée et recommencez"
+    read -p "***********************************************"
+    exit
+    fi
+    # Installer une Nutyx dans la chroot
 fi
 
 exit 0

@@ -66,7 +66,7 @@ if [ $USER != "root" ]
     read -p "***********************************************"
     exit
     fi
-    # Installer une Nutyx dans la chroot
+    # Passer au script 02_compEn_chroot
 fi
 
 exit 0

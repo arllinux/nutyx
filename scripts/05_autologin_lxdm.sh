@@ -26,8 +26,10 @@ if [ $USER != "root" ]
     if [ $? = "0" ]
 		then
   		# Modifier le fichier lxdm.conf
-  		cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.ofd
-  		cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
+      sed -s 's/^# autologin=guest/autologin='"$nom"'/' $CWD/../lxdm/lxdm.conf.b
+			cat $CWD/../lxdm/lxdm.conf.b > $CWD/../lxdm/lxdm.conf 
+  	  #	cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.ofd
+  		# cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
   	else
 			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 			echo "Le fichier n'a pas pu être modifié !!"

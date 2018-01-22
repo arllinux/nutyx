@@ -2,7 +2,7 @@
 # Dès l'installation de base terminée,
 check
 mate
-mate-desktop
+mate-extra
 lxdm
 wget
 zip

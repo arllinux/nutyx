@@ -9,14 +9,12 @@ Puis l'utilisateur courant.
 C'est plus simple que de le faire ensuite.
 =================================================
 
-Lancer un terminal
-Passer le fond blanc en noir pour y voir un peu mieux
-Renseigner les paquets disponibles à notre nouvelle installation
-$ check
+Lancer l'install de base et répondre aux questions de l'installeur.
 
-Rentrer en root :
-# su -
-Mot de passe
+Ces commandes sont à faire dès que l'install de base est terminée.
+On a pas encore d'interface graphique.
+Invite de commande : root
+Mot de passe :
 
 # check
 # cards diff
@@ -29,18 +27,35 @@ Ajouter quelques outils indispensables
 
 Récupérer les scripts et la documentation : 
 # git clone http://github.com/arllinux/nutyx
+# cd nutyx/scripts
+#
+000_A_lire_en_premier
+# 00_config_git.sh
+# 011_consoles.sh
+# 012_install10Base.sh
+
+# reboot
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Lancer un terminal
+Passer le fond blanc en noir pour y voir un peu mieux
+
+Rentrer en root :
+# su -
+Mot de passe
 
 Ensuite exécuter les scripts dans l'ordre des numéros
 # cd nutyx/scripts
-#
-# ./000_config_git.sh
-# ./01_consoles.sh
-# ./02_postinstall10.sh
-# ./03_backbround_nutyx.sh
-# ./04_param_nutyx10.sh
+# 02_postinstall10.sh
+# 03_background_nutyx.sh
+# 04_param_nutyx10.sh
+Facultatif
+# 05_autologin_lxdm.sh
 
 On éteind et on redémarre
 
 Moins de 25 mn chrono dans Virtualbox avec 2G de RAM....
 
 Enjoy !!
+

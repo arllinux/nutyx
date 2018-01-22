@@ -8,6 +8,7 @@
 # propose 2 installations d'outils pour un poste de travail
 
 CWD=$(pwd)
+APPWAY="/usr/share/applications"
 
 # Vérification de la syntaxe de l'utilisateur principal
  if [ $USER != "root" ]
@@ -83,6 +84,20 @@ CWD=$(pwd)
      echo "==============================================================="
      PAQUETSSUPP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/sup_paquets)
      cards remove $PAQUETSSUPP
+
+     # Mise à jour de fichiers .desktop traduits partiellement
+     echo "==============================================================="
+     echo "==             Remplacemnt de fichiers .desktop              =="
+     echo "==============================================================="
+#     APPDESKTOP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../desktop/fich_app)
+#		 cp $CWD/../desktop/$APPDESKTOP /usr/share/applications
+		 cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
+		 cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
+		 cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
+     cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
+     cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
+     cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+     update-desktop-database
 
     echo "================================================================="
     echo "===                 Installation terminée                     ==="

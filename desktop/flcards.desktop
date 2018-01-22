@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Gestionnaire de paquets Flcards
+Comment=Gère les paquets Nutyx
+GenericName=Package Manager
+Exec=sudo flcards
+Terminal=false
+Icon=flcards
+Categories=System;
+Type=Application
+StartupNotify=true

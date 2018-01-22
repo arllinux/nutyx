@@ -1,11 +1,19 @@
 # Paquets supplémentaires à installer
 # Environnement léger : paquets3
-# firefox, thunderbird, mate, mate-extra sont intégrés au 4 janvier 2018
 # Bureautique
 abiword
 gnumeric
 simple-scan
+# Internet
+midori
+claws-mail
+firefox
+thunderbird
+# Graphisme
+gimp
+mypain
+shotwell
 # Son et vidéo
 brasero
 vlc
-simplescreenrecorder
+clementine

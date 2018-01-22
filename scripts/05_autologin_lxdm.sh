@@ -13,8 +13,6 @@ if [ $USER != "root" ]
     then
       echo "Pour exécuter ce script il faut être l'utilisateur root !"
     else
-		# tester si le programme gawk est intallé, sinon le faire.
-		# cards info gawk | grep Nom | grep gawk | cut -d : -f2
 
     # Vérification du nom d'utilisateur
     read -p 'Utilisateur (login) à personnaliser : ' nom
@@ -26,10 +24,12 @@ if [ $USER != "root" ]
     if [ $? = "0" ]
 		then
   		# Modifier le fichier lxdm.conf
+  	  cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.old
       sed -s 's/^# autologin=guest/autologin='"$nom"'/' $CWD/../lxdm/lxdm.conf.b
 			cat $CWD/../lxdm/lxdm.conf.b > $CWD/../lxdm/lxdm.conf 
-  	  #	cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.ofd
-  		# cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
+			cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
+  	  cp /etc/lxdm/lxdm.conf.old $CWD/../lxdm/lxdm.conf
+
   	else
 			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 			echo "Le fichier n'a pas pu être modifié !!"

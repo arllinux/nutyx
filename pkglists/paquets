@@ -1,8 +1,9 @@
 # Paquets supplémentaires à installer
+wget
+network-manager-applet
 dconf-editor
 alsa-utils
 xdg-user-dirs
 xfce4-elementary-icon-theme
 tar
 rsync
-wget

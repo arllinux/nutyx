@@ -1,0 +1,17 @@
+# Pour l'installation de la 10.0 xorg.
+# Dès l'installation de base terminée,
+check
+mate
+mate-desktop
+lxdm
+wget
+zip
+unzip
+tar
+rsync
+xdg-user-dirs
+gvfs
+alsa-utils
+network-manager-applet
+dconf-editor
+xfce4-elementary-icon-theme

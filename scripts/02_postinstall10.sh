@@ -56,7 +56,7 @@ APPWAY="/usr/share/applications"
   if [ $desk = "1" ]
     then
       # Installer les paquets supplémentaires
-      echo "Installation complète"
+      echo ":: Installation complète ::"
       echo ":: Ajout de paquets. ::"
       PAQUETS2=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets2)
       cards install $PAQUETS2
@@ -64,7 +64,7 @@ APPWAY="/usr/share/applications"
   elif [ $desk = "2" ]
     then
       # Installer les paquets supplémentaires
-      echo "Installation de quelques outils"
+      echo ":: Installation légère ::"
       echo ":: Ajout de paquets. ::"
       PAQUETS3=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets3)
       cards install $PAQUETS3

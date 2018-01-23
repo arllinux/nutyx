@@ -1,6 +1,5 @@
 # Pour l'installation de la 10.0 xorg.
 # Dès l'installation de base terminée,
-check
 mate
 mate-extra
 lxdm

@@ -18,7 +18,7 @@ CWD=$(pwd)
  	 # Voir pkglist/paquets4 
      echo "==============================================================="
      echo "==              Installation de quelques outils              =="
-     echo "==										 Ajout de paquets.                      =="
+     echo "==                    Ajout de paquets.                      =="
      echo "==============================================================="
      PAQUETS4=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets4)
      cards install $PAQUETS4

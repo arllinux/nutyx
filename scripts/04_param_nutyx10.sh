@@ -30,7 +30,7 @@ WAYLXDM='/usr/share/lxdm/themes/Industrial/'
          # lxdm
          cd $WAYLXDM
          wget $SLO10rc/$LXDM
-	 tar xvf $LXDM
+				 tar xvf $LXDM
          chown root:root nutyx.jpg
 
          # dconf

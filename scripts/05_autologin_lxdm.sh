@@ -21,20 +21,20 @@ if [ $USER != "root" ]
     read nom
     done
     cat /etc/passwd | grep bash | gawk -F ":" '{print $1}' | grep -w $nom > /dev/null
-    if [ $? = "0" ]
-		then
-  		# Modifier le fichier lxdm.conf
-  	  cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.old
-      sed -s 's/^# autologin=guest/autologin='"$nom"'/' $CWD/../lxdm/lxdm.conf.b
-			cat $CWD/../lxdm/lxdm.conf.b > $CWD/../lxdm/lxdm.conf 
-			cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
-  	  cp /etc/lxdm/lxdm.conf.old $CWD/../lxdm/lxdm.conf
-
-  	else
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			echo "Le fichier n'a pas pu être modifié !!"
-			echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-		fi
+  if [ $? = "0" ]
+   then
+       # Modifier le fichier lxdm.conf
+       cp /etc/lxdm/lxdm.conf /etc/lxdm/lxdm.conf.old
+       sed -s 's/^# autologin=guest/autologin='"$nom"'/' $CWD/../lxdm/lxdm.conf.b
+       cat $CWD/../lxdm/lxdm.conf.b > $CWD/../lxdm/lxdm.conf 
+       cat $CWD/../lxdm/lxdm.conf > /etc/lxdm/lxdm.conf
+       cp /etc/lxdm/lxdm.conf.old $CWD/../lxdm/lxdm.conf
+     
+  else
+       echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+       echo "Le fichier n'a pas pu être modifié !!"
+       echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  fi
 fi
 
 exit 0

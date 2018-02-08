@@ -34,7 +34,7 @@ APPWAY="/usr/share/applications"
     echo "                                                               "
     echo "                                     ===>  Votre choix sera 1 :"
     echo "                                                               "
- 	  echo "                           ou                                  "
+		echo "                           ou                                  "
     echo "                                                               "
     echo "                   Environnement léger                         "
     echo "---------------------------------------------------------------"
@@ -89,8 +89,8 @@ APPWAY="/usr/share/applications"
      echo "==============================================================="
      echo "==             Remplacemnt de fichiers .desktop              =="
      echo "==============================================================="
-#     APPDESKTOP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../desktop/fich_app)
-#		 cp $CWD/../desktop/$APPDESKTOP /usr/share/applications
+		 #     APPDESKTOP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../desktop/fich_app)
+		 #		 cp $CWD/../desktop/$APPDESKTOP /usr/share/applications
 		 cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
 		 cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
 		 cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old

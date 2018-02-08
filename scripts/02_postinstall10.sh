@@ -73,8 +73,8 @@ APPWAY="/usr/share/applications"
      echo "==============================================================="
      echo "==               Vous quittez la procédure                   =="
      echo "==============================================================="
-		 sleep 2
-		 exit 0
+     sleep 2
+     exit 0
   fi
 
 

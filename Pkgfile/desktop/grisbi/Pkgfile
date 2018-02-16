@@ -1,0 +1,23 @@
+# Depends on: desktop-file-utils gtk2 gettext grep intltool
+
+description="Personal financial management program"
+url="http://www.grisbi.org/"
+packager="Jean-Pierre Antinoux at free dot fr"
+name=grisbi
+version=1.0.2
+release=1
+
+source=(http://downloads.sourceforge.net/$name/$name-$version.tar.bz2)
+
+build() {
+
+  cd $name-$version
+  ./configure \
+          --prefix=/usr
+          
+  make
+  make DESTDIR=$PKG install
+
+  install -Dm644 $SRC/$name-$version/grisbi.desktop \
+  $PKG/usr/share/applications/grisbi.desktop
+}

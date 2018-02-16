@@ -191,3 +191,17 @@ drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 zlib
  zlib
 
 # Fin text # 
+mkdir: created directory '/mnt/lfs//var'
+mkdir: created directory '/mnt/lfs//var/lib'
+mkdir: created directory '/mnt/lfs//var/lib/pkg'
+mkdir: created directory '/mnt/lfs//var/lib/pkg/DB'
++ install -m644 src/pkgadd.conf /mnt/lfs//var/lib/pkg/pkgadd.conf
+=======> Building /home/lfs/development/chroot/cards/Pkgfile succeeded.
+done
+/home/lfs/development/chroot
+lfs:~/development/chroot$ 
+je quitte chroot
+# Exit
+
+démonter le système de fichier
+# umount /$LFS

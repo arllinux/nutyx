@@ -1,0 +1,193 @@
+# Mes notes de construction
+
+Installer les outils de développement ainsi que git
+# get cards.devel git
+
+Ne pas oublier si on a déjà construit une première fois :
+# userdel lfs
+# rm -r /home/lfs
+# groupdel lfs
+
+Préparation de la partition
+Je dispose dans cette machine virtuelle d'un DD de 40 Go
+et d'un partition /dev/sda4 de + de 30 Go
+
+Formatage de la partition
+# mkfs.ext4 /dev/sda4
+
+Création de la variable pour l'accès au dossier de construction :
+# export LFS=/mnt/lfs
+Test :
+# echo $LFS
+/mnt/lfs
+
+Création du dossier
+# mkdir -pv $LFS
+Monter la partition
+# mount /dev/sda4 $LFS
+
+### toujours penser à remonter la partition avant de commencer les passes 1 ou
+#2
+
+#=================================
+C'est parti pour la première passe
+#=================================
+
+Construction de CHROOT (passe 1)
+
+Préparation de l'environnement chroot pour construire la NuTyx dans la passe 2
+
+On pense bien sur à monter la partition si on ne l'a pas fait.
+
+Création des dossiers, des liens et du compte adhéquat
+
+#============================================
+On travaille en root dans la première partie.
+#============================================
+
+On vérifie que la variable est bien créé
+# export LFS=/mnt/lfs
+
+On crée les dossier
+# mkdir -vp $LFS/{sources,tools}
+
+Création de liens
+# ln -svf $LFS/tools /
+# ln -svf $LFS/sources /
+
+Création de l'utilsateur lfs
+# groupadd lfs
+# groupadd -s /bin/bash -g lfs -l -k /dev/null lfs
+# passwd lfs
+Le mot de passe n'est pas indispensable.
+
+Changement de propriétaire et de mode des dossiers
+On transforme root:root en lfs:root pour les 2 dossiers
+# chown -v lfs $LFS/{tools,sources}
+On donne les droits d'écriture "w" et on met le sticky bit "t" sur "sources"
+# chmod -v a+wt $LFS/sources
+On transforme root:root en lfs:root pour le dossier "lfs"
+
+On injecte dans le fichier .bash_profile les réglages.
+# cat > /home/lfs/.bash_profile << "EOF"
+> exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+> EOF
+
+Idem pour le fichier .bashrc
+# echo "set +h
+> umask 022
+> LFS=$LFS
+> LC_ALL=POSIX
+> LFS_TARGET=$(uname -m)-lfs-linux-gnu
+> PATH=/home/lfs/bin:/tools/bin:/bin:/usr/bin
+> export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc
+
+#==========================================
+On travaille en LFS dans le deuxième partie
+#==========================================
+
+# su - lfs
+On récupère la dernière version des sources sous git
+
+# git clone git://github.com/NuTyX/base-sysV.git development
+
+On entre dans le dossier qui vient de se créer.
+# cd development
+
+On lance le script qui fait des vérifications et qui lance le chargement des sources.
+# scripts/runmebeforepass1
+
+Si tout c'est bien passé :
+
+# ====> Succesfull configured
+
+Se déplacer dans le dossier chroot
+# cd chroot
+
+Et on lance la compilation de tous les outils que l'on vient de télécharger :
+# pass
+
+Sur ma machine avec 4 coeurs il faut environ 4 heures.
+# =======> Building '/home/lfs/development/chroot/cards/Pkgfile' succeeded.
+# /home/lfs/development/chroot
+
+On peut contrôle la construction de chaque paquet dans /home/lfs/logs/chroot.
+
+#========================
+Fin de la première partie
+#========================
+
+Les sources :
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 bash
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 binutils_pass1
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 binutils_pass2
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 bison
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 bzip2
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 cards
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 coreutils
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 dejagnu
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 diffutils
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 expect
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 file
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 findutils
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 gawk
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 gcc_pass1
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 gcc_pass2
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 gettext
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 glibc
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 grep
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 gzip
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 libarchive
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 libstdc++
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 linux-header
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 m4
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 make
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 ncurses
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 patch
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 perl
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 pkg-config
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 sed
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 tar
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 tcl
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 texinfo
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 util-linux
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 xz
+drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 zlib
+
+ bash
+ binutils_pass1
+ binutils_pass2
+ bison
+ bzip2
+ cards
+ coreutils
+ dejagnu
+ diffutils
+ expect
+ file
+ findutils
+ gawk
+ gcc_pass1
+ gcc_pass2
+ gettext
+ glibc
+ grep
+ gzip
+ libarchive
+ libstdc++
+ linux-header
+ m4
+ make
+ ncurses
+ patch
+ perl
+ pkg-config
+ sed
+ tar
+ tcl
+ texinfo
+ util-linux
+ xz
+ zlib
+
+# Fin text # 

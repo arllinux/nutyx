@@ -16,4 +16,16 @@ eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -lh'
 alias la='ls $LS_OPTIONS -la'
-alias up='sudo cards sync && sudo cards diff'
+
+	if [ $EUID -eq 0 ]; then
+         alias del='cards remove'
+         alias get='cards install'
+         alias up='cards install -u'
+         alias check='cards sync;cards diff'
+		else
+         alias del='sudo cards remove'
+         alias get='sudo cards install'
+         alias up='sudo cards install -u'
+         alias check='sudo cards sync;sudo cards diff'
+	fi
+# End ~/.bashrc

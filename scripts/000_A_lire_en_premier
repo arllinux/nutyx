@@ -17,13 +17,12 @@ Invite de commande : root
 Mot de passe :
 
 # check
-# cards diff
 
-Si des paquets apparaisse à la suite de la commande "diff"
+Si des paquets apparaisse à la suite de la commande "check"
 # cards upgrade
 
 Ajouter quelques outils indispensables
-# cards install vim git
+# get vim git
 
 Récupérer les scripts et la documentation : 
 # git clone http://github.com/arllinux/nutyx

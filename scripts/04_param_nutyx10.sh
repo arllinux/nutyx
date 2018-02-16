@@ -8,10 +8,12 @@
 # environement de bureau Mate avec mes réglages personnels
 
 CWD=$(pwd)
+LXDM='nutyx_lxdm.tar.gz'
 DCONF='dconf.tar.gz'
 MOZ='pref_firefox.tar.gz'
 THUN='pref-thunderbird.tar.gz'
 SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
+WAYLXDM='/usr/share/lxdm/themes/Industrial/'
 # SLO10rc='http://82.240.4.59/arllinux/nutyx10rc_0118'
 
 # Vérification de la syntaxe de l'utilisateur principal
@@ -25,6 +27,12 @@ SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
        if [ $? = "0" ]
          then
  
+         # lxdm
+         cd $WAYLXDM
+         wget $SLO10rc/$LXDM
+				 tar xvf $LXDM
+         chown root:root nutyx.jpg
+
          # dconf
          cd /home/$nom/.config
          wget $SLO10rc/$DCONF
@@ -40,11 +48,11 @@ SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
          chown -R $nom:$nom /home/$nom/.mozilla
  
          # Thunderbird	
-         cd /home/$nom/
-         wget $SLO10rc/$THUN
-         tar xvf $THUN
-         rm $THUN
-         chown -R $nom:$nom /home/$nom/.thunderbird
+         # cd /home/$nom/
+         # wget $SLO10rc/$THUN
+         # tar xvf $THUN
+         # rm $THUN
+         # chown -R $nom:$nom /home/$nom/.thunderbird
  
       else
          echo "Ce nom d'utilisateur n'existe pas. Réessayez !"

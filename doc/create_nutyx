@@ -26,8 +26,7 @@ Création du dossier
 Monter la partition
 # mount /dev/sda4 $LFS
 
-### toujours penser à remonter la partition avant de commencer les passes 1 ou
-#2
+### toujours penser à remonter la partition avant de commencer les passes 1 ou 2
 
 #=================================
 C'est parti pour la première passe
@@ -48,7 +47,7 @@ On travaille en root dans la première partie.
 On vérifie que la variable est bien créé
 # export LFS=/mnt/lfs
 
-On crée les dossier
+On crée les dossiers
 # mkdir -vp $LFS/{sources,tools}
 
 Création de liens
@@ -62,11 +61,15 @@ Création de l'utilsateur lfs
 Le mot de passe n'est pas indispensable.
 
 Changement de propriétaire et de mode des dossiers
+
 On transforme root:root en lfs:root pour les 2 dossiers
 # chown -v lfs $LFS/{tools,sources}
+
 On donne les droits d'écriture "w" et on met le sticky bit "t" sur "sources"
 # chmod -v a+wt $LFS/sources
+
 On transforme root:root en lfs:root pour le dossier "lfs"
+# chown lfs:root $LFS
 
 On injecte dans le fichier .bash_profile les réglages.
 # cat > /home/lfs/.bash_profile << "EOF"
@@ -98,7 +101,6 @@ On lance le script qui fait des vérifications et qui lance le chargement des so
 # scripts/runmebeforepass1
 
 Si tout c'est bien passé :
-
 # ====> Succesfull configured
 
 Se déplacer dans le dossier chroot
@@ -191,6 +193,9 @@ drwxr-xr-x 1 lfs lfs 14 Feb 16 03:47 zlib
  zlib
 
 # Fin text # 
+
+Ok si message suivant :
+
 mkdir: created directory '/mnt/lfs//var'
 mkdir: created directory '/mnt/lfs//var/lib'
 mkdir: created directory '/mnt/lfs//var/lib/pkg'
@@ -200,8 +205,9 @@ mkdir: created directory '/mnt/lfs//var/lib/pkg/DB'
 done
 /home/lfs/development/chroot
 lfs:~/development/chroot$ 
-je quitte chroot
+
+Je quitte chroot
 # Exit
 
-démonter le système de fichier
+Démontage du système de fichier
 # umount /$LFS

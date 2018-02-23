@@ -1,0 +1,43 @@
+# Gestion de git
+
+La branche par défaut de git est "master"
+J'ai choisi de créer une branche "development"
+
+Pour connaitre la brache sur laquelle on est :
+# git branch
+master*
+
+Créer une nouvelle branche sur la machine locale :
+# git branch development
+
+Vérifier
+# git branch
+master*
+development
+
+Changer de branche :
+# git checkout development
+
+Vérifier
+# git branch
+development*
+master
+
+Tranférer les fichiers de master vers development
+# git merge master
+
+Sur les autres machines si le dépot est déja créé
+il faut créer la branche development
+
+Si on veut supprimer la branche
+# git branch -d development
+
+Travail collaboratif
+Dépot distant --> Dépot local
+
+Créer un compte sur github
+
+Première fois
+# git remote add origin https://github.com/arllinux/depot.git
+# git remote
+origin

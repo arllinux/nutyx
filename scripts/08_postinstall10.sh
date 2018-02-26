@@ -62,7 +62,7 @@ APPWAY="/usr/share/applications"
     do
         case $choice in
             1)
-                echo "LibreOffice" >> listechoix
+                echo "libreoffice" >> listechoix
                 ;;
             2)
                 echo "firefox" >> listechoix > firefox

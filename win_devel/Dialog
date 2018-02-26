@@ -1,0 +1,39 @@
+#! /bin/sh
+DIALOG=${DIALOG=dialog}
+fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
+trap "rm -f $fichtemp" 0 1 2 5 15
+
+$DIALOG --backtitle "Décochez les programmes non souhaité" \
+	--title "Faites votre choix" --clear \
+  --checklist "Sélectionnez avec les flèches, puis décochez avec Espace " 30 61 5 \
+	"LO" "libreoffice" ON\
+  	"Scan" "simple-scan" ON\
+	   "SCR" "simplescreenrecorder" ON\
+	    "Abiword" "abiword" off\
+	     "Gnumeric" "gnumeric" off\
+	      "Firefox" "firefox" ON\
+	       "Midori" "midori" off\
+	        "Claws-mail" "claws-mail" off\
+	         "Thunderbird" "thunderbird" off\
+          	"Transmission" "transmission" off\
+	           "Filezilla" "filezilla" off\
+	            "Gimp" "gimp" ON\
+	             "Mmypaint" "mypaint" off\
+	              "Shotwell" "shotwell" ON\
+                	"Inkscape" "inkscape" off\
+	                 "Darktable" "darktable" off\
+	                  "Blender" "blender" off\
+                    	"Brasero" "brasero" ON\
+	                     "Vlc" "vlc" ON\
+	                      "Clementine" "clementine" off\
+	                       "Geany" "geany" off\ 2> $fichtemp
+valret=$?
+choix=`cat $fichtemp`
+case $valret in
+  0)
+   echo "'$choix' est votre chanteur préféré";;
+  1)
+   echo "Appuyé sur Annuler.";;
+  255)
+   echo "Appuyé sur Echap.";;
+esac

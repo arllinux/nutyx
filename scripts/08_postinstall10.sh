@@ -18,7 +18,7 @@ APPWAY="/usr/share/applications"
  if [ $USER != "root" ]
     then
       echo "Pour exécuter ce script il faut être l'utilisateur root !"
-    else
+ else
  
  	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
     echo "Fichier de conf du network manager"
@@ -139,7 +139,12 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
        cards install $PAQUETSAJ
-    
+
+			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
+  		 if [ -f "firefox" ];then
+       	cards install firefox -f
+			 fi
+
 			 # Supprimer les paquets non désirés
        echo "==============================================================="
        echo "==                  Suppression de paquets                   =="

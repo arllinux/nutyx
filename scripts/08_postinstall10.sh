@@ -9,7 +9,11 @@
 
 # Jean-Pierre Antinoux - Janvier 2018 - Février 2018
 # Ajout d'une liste de choix pour les logiciels plutôt que 2 packs
-# préconfigurés
+# préconfigurés.
+# 2 mars 2018
+# Précision sur le chemin des fichiers firefox, clementine, listechoix avec
+# l'introdution de l'emplacement pour l'effacement et la suppression à la fin
+# du script.
 
 CWD=$(pwd)
 APPWAY="/usr/share/applications"
@@ -27,15 +31,15 @@ APPWAY="/usr/share/applications"
    # Propose un choix de paquets et permet d'en sélectionner de nouveaux - Février
    # Vérifie si les fichiers cités existent et les supprime. 
 	  if [ -f "firefox" ];then
-	    rm firefox
+	    rm $CWD/firefox
     fi
     if [ -f "clementine" ];then
-	    rm clementine
+	    rm $CWD/clementine
     fi
     if [ -f "listechoix" ];then
-      rm listechoix
+      rm $CWD/listechoix
     fi
-    touch listechoix
+    touch $CWD/listechoix
 
 		# Liste de choix
     cmd=(dialog --separate-output --checklist "Sélectionner ou désélectionner avec la barre d'espace :" 22 76 16)
@@ -156,13 +160,15 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        echo "==             Remplacemnt de fichiers .desktop              =="
        echo "==============================================================="
-  		 if [ -f "firefox" ];then
+  		 if [ -f "$CWD/firefox" ];then
          cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
          cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
+	       rm $CWD/firefox
        fi
-       if [ -f "clementine" ];then
+       if [ -f "$CWD/clementine" ];then
          cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
          cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
+	       rm $CWD/clementine
        fi
          cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
          cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 

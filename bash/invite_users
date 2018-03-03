@@ -28,4 +28,5 @@ alias la='ls $LS_OPTIONS -la'
          alias up='sudo cards install -u'
          alias check='sudo cards sync;sudo cards diff'
 	fi
+shopt -s histappend
 # End ~/.bashrc

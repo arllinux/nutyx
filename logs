@@ -1,0 +1,34 @@
+# Suivi de modifications du dépot NuTyX
+
+sam. mars  3 01:16:51 CET 2018
+Sur la branche development
+Votre branche est à jour avec 'origin/development'.
+
+Modifications qui seront validées :
+  (utilisez "git reset HEAD <fichier>..." pour désindexer)
+
+	modifié :         bash/invite_root
+	modifié :         bash/invite_users
+	nouveau fichier : logs
+
+# Constat au 3 mars : l'historique ne fonctionne pas dans la console.
+# En fait le fichier .bash_history n'existe pas,
+# Pour le créer j'ai ajouté :
+HISTFILE='/root/.bash_history'
+# Du coup je ne sais pas si la ligne :
+shopt -s histappend
+# est utile.
+# J'ai ajouté ces lignes dans le fichier bash/invite_root pour les prochaines
+# install.
+# Ajout au contenu du fichier /root/.bashrc
+shopt -s histappend
+HISTFILE='/root/.bash_history'
+#---------------------------------------------
+# Constat au 3 mars : la mémorisation de commande ne fonctionne pas.
+# pour l'utilisateur.
+# J'ai ajouté cette commande pour mémoriser :
+shopt -s histappend
+# J'ai ajouté cette ligne dans le fichier bash/invite_user pour les prochaines
+# install.
+# Ajout au contenu du fichier /home/$USER/.bashrc
+shopt -s histappend

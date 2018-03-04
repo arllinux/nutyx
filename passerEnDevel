@@ -29,3 +29,8 @@ Ensuite je crée un ligne dans le fichier "config"
 
 Enregistrement puis
 # git pull
+#
+# Merger les changements de development vers master
+git checkout master
+git diff master..development
+git merge development

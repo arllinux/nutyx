@@ -10,8 +10,9 @@
 # La commande ci-dessous permet l'accès à la branche development
 #----------------------------------------------
 git branch --track development origin/development
-
-# git pull
+git checkout development
+git branch
+git pull
 
 # Merger les changements de development vers master
 # git checkout master

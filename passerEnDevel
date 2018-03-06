@@ -12,6 +12,6 @@ s git branch --track development origin/development
 git pull
 
 # Merger les changements de development vers master
-git checkout master
-git diff master..development
-git merge development
+# git checkout master
+# git diff master..development
+# git merge development

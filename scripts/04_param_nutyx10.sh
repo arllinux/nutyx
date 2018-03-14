@@ -6,6 +6,8 @@
 
 # La configuration qui se met en place a eté créé sous un
 # environement de bureau Mate avec mes réglages personnels
+# Modif faite après le passage en 10.1 le 14 mars 2018
+# Suppression archive nutyx_lxdm.tar.gz après install
 
 CWD=$(pwd)
 LXDM='nutyx_lxdm.tar.gz'
@@ -32,6 +34,9 @@ WAYLXDM='/usr/share/lxdm/themes/Industrial/'
          wget $SLO10rc/$LXDM
 				 tar xvf $LXDM
          chown root:root nutyx.jpg
+				 if [ -f "nutyx.jpg" ]; then
+								 rm $LXDM
+         fi
 
          # dconf
          cd /home/$nom/.config

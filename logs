@@ -32,3 +32,5 @@ shopt -s histappend
 # install.
 # Ajout au contenu du fichier /home/$USER/.bashrc
 shopt -s histappend
+
+# fin

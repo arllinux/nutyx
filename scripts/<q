@@ -19,17 +19,17 @@ CWD=$(pwd)
 APPWAY="/usr/share/applications"
 
 # Vérification de la syntaxe de l'utilisateur principal
- if [ $USER != "root" ]
-    then
-      echo "Pour exécuter ce script il faut être l'utilisateur root !"
- else
- 
- 	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
-    echo "Fichier de conf du network manager"
-    cp $CWD/../network/network /etc/sysconfig/network
-
-   # Propose un choix de paquets et permet d'en sélectionner de nouveaux - Février
-   # Vérifie si les fichiers cités existent et les supprime. 
+# if [ $USER != "root" ]
+#    then
+#      echo "Pour exécuter ce script il faut être l'utilisateur root !"
+# else
+# 
+# 	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
+#    echo "Fichier de conf du network manager"
+#    cp $CWD/../network/network /etc/sysconfig/network
+#
+#   # Propose un choix de paquets et permet d'en sélectionner de nouveaux - Février
+#   # Vérifie si les fichiers cités existent et les supprime. 
 	  if [ -f "firefox" ];then
 	    rm firefox
     fi
@@ -39,6 +39,7 @@ APPWAY="/usr/share/applications"
     if [ -f "listechoix" ];then
       rm listechoix
     fi
+#    touch listechoix
 
 		# Liste de choix
     cmd=(dialog --separate-output --checklist "Sélectionner ou désélectionner avec la barre d'espace :" 22 76 16)
@@ -136,56 +137,60 @@ APPWAY="/usr/share/applications"
     done
     if [ -f "listechoix" ];
 			then
-       # Ajouter les paquets sélectionnés ci-dessus
-       echo "==============================================================="
-       echo "==                     Ajout de paquets                      =="
-       echo "==============================================================="
-       PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
-       cards install $PAQUETSAJ
-
-			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
-  		 if [ -f "firefox" ];then
-       	cards install firefox -f
-			 fi
-
-			 # Supprimer les paquets non désirés
-       echo "==============================================================="
-       echo "==                  Suppression de paquets                   =="
-       echo "==============================================================="
-       PAQUETSSUPP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/sup_paquets)
-       cards remove $PAQUETSSUPP
-  
-       # Mise à jour de fichiers .desktop traduits partiellement
-       echo "==============================================================="
-       echo "==             Remplacemnt de fichiers .desktop              =="
-       echo "==============================================================="
-  		 if [ -f "$CWD/firefox" ];then
-         cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
-         cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
-	       rm $CWD/firefox
-       fi
-       if [ -f "$CWD/clementine" ];then
-         cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
-         cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
-	       rm $CWD/clementine
-       fi
-         cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
-         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
-       update-desktop-database
-
+			echo "fichier listechoix crée"
+#       then
+#       # Ajouter les paquets sélectionnés ci-dessus
+#       echo "==============================================================="
+#       echo "==                     Ajout de paquets                      =="
+#       echo "==============================================================="
+#       PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
+#       cards install $PAQUETSAJ
+#
+#			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
+#  		 if [ -f "firefox" ];then
+#       	cards install firefox -f
+#			 fi
+#
+#			 # Supprimer les paquets non désirés
+#       echo "==============================================================="
+#       echo "==                  Suppression de paquets                   =="
+#       echo "==============================================================="
+#       PAQUETSSUPP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/sup_paquets)
+#       cards remove $PAQUETSSUPP
+#  
+#       # Mise à jour de fichiers .desktop traduits partiellement
+#       echo "==============================================================="
+#       echo "==             Remplacemnt de fichiers .desktop              =="
+#       echo "==============================================================="
+#  		 if [ -f "$CWD/firefox" ];then
+#         cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
+#         cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
+#	       rm $CWD/firefox
+#       fi
+#       if [ -f "$CWD/clementine" ];then
+#         cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
+#         cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
+#	       rm $CWD/clementine
+#       fi
+#         cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
+#         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+#       update-desktop-database
+#
+#      echo "================================================================="
+#      echo "===                 Installation terminée                     ==="
+#      echo "===      Lancez les scripts pour personnaliser le bureau      ==="
+#      echo "================================================================="
+   else
+#         cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
+#         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+#       update-desktop-database
       echo "================================================================="
-      echo "===                 Installation terminée                     ==="
+      echo "===              La procédure à été interrompue               ==="
+      echo "===          Aucun programme supplémentaire installé          ==="
       echo "===      Lancez les scripts pour personnaliser le bureau      ==="
       echo "================================================================="
-  else
-         cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
-         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
-       update-desktop-database
-     echo "================================================================="
-     echo "===              La procédure à été interrompue               ==="
-     echo "===          Aucun programme supplémentaire installé          ==="
-     echo "===      Lancez les scripts pour personnaliser le bureau      ==="
-     echo "================================================================="
-  fi
-fi
+   fi
+#fi
+
+#exit 0
 

@@ -73,7 +73,7 @@ APPWAY="/usr/share/applications"
                 echo "libreoffice" >> listechoix
                 ;;
             2)
-                echo "firefox" >> listechoix > firefox
+                echo "firefox" >> listechoix
                 ;;
             3)
                 echo "brasero" >> listechoix
@@ -82,7 +82,7 @@ APPWAY="/usr/share/applications"
                 echo "vlc" >> listechoix
                 ;;
             5)
-                echo "clementine" >> listechoix > clementine
+                echo "clementine" >> listechoix
                 ;;
             6)
                 echo "gimp" >> listechoix
@@ -134,8 +134,9 @@ APPWAY="/usr/share/applications"
                 ;;
         esac
     done
-    if [ -f "listechoix" ];
-			then
+      [ -s "listechoix" ]
+         if [ $? = "0" ] ;
+          then
        # Ajouter les paquets sélectionnés ci-dessus
        echo "==============================================================="
        echo "==                     Ajout de paquets                      =="
@@ -144,7 +145,8 @@ APPWAY="/usr/share/applications"
        cards install $PAQUETSAJ
 
 			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
-  		 if [ -f "firefox" ];then
+			 cat listechoix | grep firefox
+  		 if [ $? "0" ]; then
        	cards install firefox -f
 			 fi
 
@@ -159,12 +161,14 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        echo "==             Remplacemnt de fichiers .desktop              =="
        echo "==============================================================="
-  		 if [ -f "$CWD/firefox" ];then
+			 cat listechoix | grep firefox
+  		 if [ $? "0" ]; then
          cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
          cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
 	       rm $CWD/firefox
        fi
-       if [ -f "$CWD/clementine" ];then
+			 cat listechoix | grep clementine
+  		 if [ $? "0" ]; then
          cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
          cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
 	       rm $CWD/clementine

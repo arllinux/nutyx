@@ -12,7 +12,7 @@
 CWD=$(pwd)
 LXDM='nutyx_lxdm.tar.gz'
 DCONF='dconf.tar.gz'
-MOZ='pref_firefox.tar.gz'
+MOZ='pref-firefox-63.tar.gz'
 THUN='pref-thunderbird.tar.gz'
 SLO10rc='http://sloteur.free.fr/arllinux/nutyx10rc_0118'
 WAYLXDM='/usr/share/lxdm/themes/Industrial/'

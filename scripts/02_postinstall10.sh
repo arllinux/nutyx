@@ -142,7 +142,7 @@ APPWAY="/usr/share/applications"
        echo "==                     Ajout de paquets                      =="
        echo "==============================================================="
        PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
-       cards install $PAQUETSAJ
+       cards -f install $PAQUETSAJ
 
 			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
 			 cat listechoix | grep firefox

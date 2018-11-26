@@ -150,7 +150,7 @@ APPWAY="/usr/share/applications"
 			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
 			 cat listechoix | grep firefox
   		 if [ $? "0" ]; then
-       	cards install firefox -f
+       	cards -f install firefox
 			 fi
 
 			 # Supprimer les paquets non désirés

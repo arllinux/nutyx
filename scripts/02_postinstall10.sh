@@ -143,6 +143,9 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
        cards -f install $PAQUETSAJ
+			 
+			 # Installe flcards (l'interface graphique de cards)
+       cards -f install flcards
 
 			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
 			 cat listechoix | grep firefox

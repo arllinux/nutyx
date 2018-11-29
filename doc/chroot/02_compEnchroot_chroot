@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Installation des outils de dÃ©veloppement
+#Installation des outils de développement
 # get cards.devel
 
 # Les fichiers de configuration
@@ -51,8 +51,8 @@ EOF
 echo "******************************************"
 echo " Synchronisation des binaires via rsync : "
 echo " Pour quitter   ==========> taper 1 : "
-echo " Branche STABLE ==========> taper 2 : "
-echo " Branche DEVELOPMENT =====> taper 3 : "
+echo " Branche FIXED  ==========> taper 2 : "
+echo " Branche ROLLING === =====> taper 3 : "
 echo "******************************************"
 read -p" Taper votre choix : 1 - 2 ou 3 : " choix
 echo "******************************************"
@@ -64,30 +64,30 @@ if [ $choix = "1" ]
 elif [ $choix = "2" ]
   then
   
-  # Version stable 
+  # Version fixed 
   echo " **********************************************"
-  echo " Vous avez choisi d'installer une version STABLE"
+  echo " Vous avez choisi d'installer une version FIXED"
   echo " Si ce n'est pas le cas faites Ctrl + C"
   echo " Si c'est votre choix, tapez Entrée :"
   read -p"***********************************************"
-  # CrÃer le dossie racine  
+  # Créer le dossier racine  
   mkdir /usr/ports/perso
   
   # Synchronisation des binaires via rsync
-  # La branche stable
+  # La branche fixed
   #
   for i in base cli gui
    do
-     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/stable/$i/ \
+     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/fixed/$i/ \
    /usr/ports/$i/
   done
   
 elif [ $choix = "3" ]
   then  
     	
-  # Version development
+  # Version rolling
   echo " ***************************************************"
-  echo " Vous avez choisi d'installer la version DEVELOPMENT"
+  echo " Vous avez choisi d'installer la version ROLLING"
   echo " Si ce n'est pas le cas faites Ctrl + C"
   echo " Si c'est votre choix, tapez Entrée :"
   read -p"***********************************************"
@@ -95,19 +95,19 @@ elif [ $choix = "3" ]
   mkdir /usr/ports/perso
   
   # Synchronisation des binaires via rsync
-  # La branche development 
+  # La branche rolling 
   #
   for i in base cli gui
    do
-     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/$i/ \
+     rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/rolling/$i/ \
    /usr/ports/$i/
   done
 
 else
         
   echo " **********************************************"
-  echo " Votre saisie ne correspond Ã  aucun des choix  "
-  echo " Appyez sur EntrÃ©e et recommencez"
+  echo " Votre saisie ne correspond à aucun des choix  "
+  echo " Appyez sur Entrée et recommencez"
   read -p "***********************************************"
   exit
 fi

@@ -71,7 +71,7 @@ elif [ $choix = "2" ]
   echo " Si c'est votre choix, tapez Entrée :"
   read -p"***********************************************"
   # Créer le dossier racine  
-  mkdir /usr/ports/perso
+  mkdir -p /usr/ports/perso
   
   # Synchronisation des binaires via rsync
   # La branche fixed
@@ -92,7 +92,7 @@ elif [ $choix = "3" ]
   echo " Si c'est votre choix, tapez Entrée :"
   read -p"***********************************************"
   # Créer le dossie racine  
-  mkdir /usr/ports/perso
+  mkdir -p /usr/ports/perso
   
   # Synchronisation des binaires via rsync
   # La branche rolling 

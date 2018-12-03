@@ -1,0 +1,84 @@
+Mes notes sur cette vidéo - 03 cécembre 2018
+#-------------------------------------------
+https://www.youtube.com/watch?v=jdYsN4FtX3s
+#-------------------------------------------
+
+Commentaires sur la vidéo d'installation de nytyx rolling
+1 - mode bios
+2 - mode UEFI
+3 - Dans une partition à coté d'une Mint
+
+1 - Mode bios
+#-------------------------------------------
+Astuces !
+Lorsqu'on lance l'installation et qu'apparait le choix de langue :
+L'installateur a déja vérifié la taille de la mémoire disponible et si l'iso peut être chargé complètement en mémoire.
+
+Sur Nutyx à partir du choix de langue toute l'installation sera dans cette langue et seule cette langue.
+
+Pourquoi le swap est 2 fois la taille de la mémoire physique ?
+Parce que la place disponible en swap doit toujours être au moins égale à la taille de la swap physique.
+
+
+2 - Mode UEFI
+#-------------------------------------------
+Installation UEFI :
+cfdisk : gpt
+
+Nouvelle = 100 Mo Système EFI (contient le fichier kernel
+Nouvelle = 2G swap
+Nouvelle = le reste pour /
+
+/dev/sda3 en btrfs
+
+/dev/sda1 en vfat
+
+# Bug
+Bug de VirtualBox
+Si on arrette elle ne redémare pas
+Si on redémarre ça marche.
+
+3 - Dans une partition à coté d'une Mint
+#-------------------------------------------
+
+Une Nytyx avec le script :
+
+Dans la machine linux mint
+$ sudo bash
+# mkdir /mnt/hd
+# mount /dev/sda2 /mnt/hd
+# wget http://www.nuty.org/install-nutyx
+# wget http://www.nuty.org/install-nutyx.md5sum
+# md5sum -c install-nutyx.md5sum
+install-nutyx: Réussi
+
+Il manque une dépandance dans Mint
+# apt install bsdtar
+
+# bash install-nutyx
+
+Les explications de ce qui vient d'être fait se trouve ici : nutyx.org/fr/downloads#5
+
+# bash install-nutyx -ec
+On est dans la chroot
+
+On revient sur la Mint pour mette Grub à jour
+# update-grub
+
+On revient dans la chroot
+# cards install lxde
+
+On sort de la chroot
+On quitte les terminaux
+
+On redémarre la Mint
+
+Dans Grub on choisi la Nutyx
+
+La Nutyx nous affiche les paramètes qui ne sont pas configurés
+En gros c'est la même chose qu'une installation avec les fenêtres ncurses.
+
+Notes :
+Pour quitter flcards il suffit de presser la touche "Esc"
+
+Fin

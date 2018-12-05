@@ -63,7 +63,8 @@ APPWAY="/usr/share/applications"
             18 "inkscape" off
             19 "darktable" off
             20 "blender" off
-            21 "geany" off)
+            21 "geany" off
+						22 "flcards" on)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices
@@ -132,6 +133,9 @@ APPWAY="/usr/share/applications"
             21)
                 echo "geany" >> listechoix
                 ;;
+						22)
+								echo "flcards" >> listechoix
+								;;
         esac
     done
       [ -s "listechoix" ]
@@ -145,7 +149,7 @@ APPWAY="/usr/share/applications"
        cards -f install $PAQUETSAJ
 			 
 			 # Installe flcards (l'interface graphique de cards)
-       cards -f install flcards
+       # cards -f install flcards
 
 			 # Firefox ne s'installe pas correctement et il faut forcer l'install.
 			 cat listechoix | grep firefox
@@ -185,9 +189,9 @@ APPWAY="/usr/share/applications"
       echo "===      Lancez les scripts pour personnaliser le bureau      ==="
       echo "================================================================="
   else
-         cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
-         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
-       update-desktop-database
+         # cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
+         # cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+       # update-desktop-database
      echo "================================================================="
      echo "===              La procédure à été interrompue               ==="
      echo "===          Aucun programme supplémentaire installé          ==="

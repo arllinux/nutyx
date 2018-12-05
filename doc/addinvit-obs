@@ -1,0 +1,27 @@
+#---------------------------
+Additions invités dans Nutyx
+#---------------------------
+
+check
+sudo cards upgrade
+sudo reboot
+get kernel-lts.devel cards.devel
+
+Il faut avoir le cd des additions invitées dans la machine hote (mint)
+Il faut insérer les additions invitées dans le tableau de bord de VirtualBox (comme l'image iso d'installation)
+sudo mount /dev/srO /mnt
+cd /mnt
+sudo ./VBoxLinuxAdditions
+sudo cards remove devel
+
+Supprimer les langues inutiles
+
+cards list | grep diagog
+
+su -
+for i in da de es fi it nl pt ru sv tr
+> do
+> cards remove $i
+> done
+
+cards list | grep diagog

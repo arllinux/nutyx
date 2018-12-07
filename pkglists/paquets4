@@ -1,4 +1,4 @@
-# Pour l'installation de la 10.0 xorg.
+# Pour l'installation de la 10.4 rolling ou fixed
 # Dès l'installation de base terminée,
 mate
 mate-extra
@@ -8,6 +8,7 @@ zip
 unzip
 tar
 rsync
+pciutils
 xdg-user-dirs
 gvfs
 alsa-utils

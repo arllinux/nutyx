@@ -1,0 +1,16 @@
+# Pour l'installation de la 10.0 xorg.
+# Dès l'installation de base terminée.
+# Kde5 
+kde5
+kde5-extra
+lxdm
+wget
+zip
+unzip
+tar
+rsync
+xdg-user-dirs
+gvfs
+alsa-utils
+network-manager-applet
+dconf-editor

@@ -2,7 +2,7 @@
 #
 # 012_install10Base.sh
 # Jean-Pierre Antinoux - Janvier 2018
-
+# Henri
 # Ce script permet d'automatiser la post install de la NuTyx 10.0
 # Il ajoute les outils que je trouve nécessaires.
 

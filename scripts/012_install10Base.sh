@@ -9,54 +9,53 @@
 CWD=$(pwd)
 
 # Vérification de la syntaxe de l'utilisateur principal
- if [ $USER != "root" ]
+if [ $USER != "root" ]
     then
       echo "Pour exécuter ce script il faut être l'utilisateur root !"
     else
 
-	 # Choix de l'environnement de bureau
+   # Choix de l'environnement de bureau
 
    # Installer les outils nécessaires
      echo "==============================================================="
      echo "==              Installation de quelques outils              =="
      echo "==                       Choix du bureau                     =="
-		 echo "== Bureau Mate  = 1                                          =="
-		 echo "== Bureau kde5  = 2                                          =="
-		 echo "== Bureau Xfce4 = 3                                          =="
-		 echo "== Bureau lxde  = 4                                          =="
+     echo "== Bureau Mate  = 1                                          =="
+     echo "== Bureau kde5  = 2                                          =="
+     echo "== Bureau Xfce4 = 3                                          =="
+     echo "== Bureau lxde  = 4                                          =="
      echo "==============================================================="
      read -p 'Votre choix de bureau : ' num
-		 	if [ $num = "1" ]
-				then
+     if [ $num = "1" ]
+       then
         PAQUETS4=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets4)
         cards install $PAQUETS4
       else
-		 	if [ $num = "2" ]
-				then
+      if [ $num = "2" ]
+        then
         PAQUETS2=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/kde5)
         cards install $PAQUETS2
       else
-		 	if [ $num = "3" ]
-				then
+      if [ $num = "3" ]
+        then
         PAQUETS3=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/xfce4)
         cards install $PAQUETS3
       else
-		 	if [ $num = "4" ]
-				then
+      if [ $num = "4" ]
+        then
         PAQUETS4=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/lxde)
         cards install $PAQUETS4
       else
-				exit
-		  fi
-		 fi
-		fi
-	 fi
+      exit
+      fi
+    fi
+  fi
+fi
    echo "==============================================================="
    echo "==   Les utilitaires de base ainsi que mate, mate-desktop   ==="
    echo "==               et lxdm ont été installés                  ==="
    echo "==============================================================="
-
- fi
+fi
 
 exit 0
 

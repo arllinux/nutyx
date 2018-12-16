@@ -1,0 +1,33 @@
+# Paramétrage du menu de xFce4
+# Je me suis appuyé sur les réglages de Nicolas Kovacs
+# j'ai adapté les valeurs pour un écran de 1680 x 1050
+
+Pour adapter le menu "Applications" à mon gout (il est trop petit d'origine)
+j'ai appliqué les paramètres suivants :
+Il faut se rendre dans :
+"Applications"
+	"Éditeur de paramètres"
+
+Dans la colonne de gauche, complètement en bas cliquer sur :
+"xsettings"
+
+Puis dans le panneau de droite double-cliquer sur :
+"IconSizes"
+
+Une boite de dialogue s'ouvre. En glissant votre souris à partir du coin bas à
+droite, agrandissez la fenêtre.
+
+Le champ "Valeur" est vide. Il faut écrire ou copier/coller la valeur suivante :
+
+gtk-menu=26,26:gtk-button=30,30:panel-applications-menu=34,34:panel-directory-menu=34,34
+
+Cliquez sur "Enregistrer"
+
+Si cela ne vous convient pas faites des modifs :
+Tachez de respecter le ratio entre les divers éléments
+
+26, 30, 34, 34
+30, 34, 38, 38 (plus gros)
+etc...
+
+--- Fin ---

@@ -29,7 +29,10 @@ else
       echo " !!! Erreur lors de la suppression du message de configuration"
       echo " >-----------------------------------------------------------<"
     fi
-    
+		
+		bash -c 'git config --global user.email "jeanpierre.antinoux@free.fr"'
+		bash -c 'git config --global user.mane "arllinux"'
+		
 fi
 
 exit 0

@@ -1,0 +1,87 @@
+# Modifier sur une NuTyX l'installation de base qui se fait sur une seule
+# partition. Séparer le /home.
+
+On considère que l'installation est déjà faite et le bureau paramétré.
+On a déjà des données, des photos des vidéos, etc...
+
+Le disque
+Dans notre exemple nous allons partir d'un disque de 30 Go
+
+Partitionement lors de l'installation :
+/dev/sda
+/dev/sda1    swap    2G
+/dev/sda2    btrfs   28G    /
+
+Pour créer une partition /home séparée il faut :
+
+1 - démarrer sur le liveCD Nutyx avec n'importe quel bureau
+
+2 - On lance un terminal
+On vérifie si fdisk voit bien les partitions listées ci-dessus.
+
+3 - On lance Gparted 
+On sélectionne la partition /dev/sda2 et on la redimentionne.
+On réduit la partition de 17 Go.
+Il reste pour le système 12Go
+
+4 - On applique un système de fichier btrfs à la nouvelle partition /dev/sda3
+On quitte Gparted.
+
+5 - On lance une terminal
+En premier on doit monter la partition qui contient le /home actuel dans la
+NuTyX live.
+C'est la partition /dev/sda2
+Dans la NuTyX il n'y a pas de /mnt : on en crée un :
+mkdir /mnt
+
+6 - On monte la partition racine dans le mnt du liveCD :
+# mount /dev/sda2 /mnt
+
+7 - On fait une archive compréssée des utilisateurs :
+# cd /mnt/home/
+# tar xf users.tar *
+
+8 - On déplace cette archive à la racine du la partition /
+# mv users.tar ../
+
+9 - On ouvre le fstab du système installé sur le disque dur
+Entre temps j'ai récupéré vim (get vim)
+# vim /mnt/etc/fstab
+...
+
+/dev/sda3	/home	btrfs	defaults	0	0
+
+...
+
+10 - On redémarre après avoir ôté le liveCD
+
+# ATTENTION
+
+11 - On passe Grub
+Lorsque l'on arrive sur le gestionnaire de connection il faut basculer ves la console :
+(Ctrl + Alt + F1 ou Ctrl de droite + F1 sur une machine virtuelle)
+
+12 - On vérifie que le /home est bien sur la partition /dev/sda3
+
+13 - On va dans le répertoire /home qui est vide
+# cd /home
+On déplace l'archive qui est à la racine dans /home
+# mv /users.tar .
+On désarchive
+# tar xf users.tar
+On vérifie que le dossiers du ou des utilisateurs on les bons droits :
+# drwxr-xr-x 92 jpantinoux jpantinoux 4,0K déc.  19 18:19 jpantinoux
+
+On supprime l'archive et le répertoire mnt
+# rm users.tar
+# rm -rf /mnt
+
+14 - On revient vers la fenêtre de connection :
+Alt + F7 sur une machine physique
+Ctrl + F7 sur VirtualBox
+
+15 - On doit retrouver son environnement de bureau et nos données en place.
+
+--- Fin ---
+
+

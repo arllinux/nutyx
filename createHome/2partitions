@@ -1,1 +1,58 @@
 # La NuTyX s'installe par défaut avec une seule partition
+# Si on souhaite une partition /home séparée il faut procéder de la manière
+# suivante :
+
+# Note : IMPORTANT - L'install se fait avec une ISO rolling (300 Mo env)
+
+1 - Au moment de l'install, dans cfdisk on partitionne de cette manière :
+Table de partition : dos
+Ex pour un disque de 20G
+- Une partition swap de 2G (dans ce cas j'ai 2G de RAM)
+- Une partition linux de 10G pour le système (/)
+- Une partition linux de 8G pour le futur /home 
+
+2 - L'installeur va détecter tout seul la partition swap :
+/dev/sda1		swap	2000Mo
+
+3 - L'installeur va demander dans quelle partition il doit installer la système :
+On choisi la partition 2 (celle de 10 Go)
+/dev/sda2		/			10000Mo
+
+4 - L'installeur va nous demander quel format de fichier pour cette partition :
+btrfs ou ext4 (dans mon cas btrfs)
+
+5 - On conserve la troisième partition intacte :
+/dev/sda3
+
+# On continue la procédure d'installation
+On a pris soin de créer un utilisateur root et un utilisteur jpantinoux
+
+6 - L'installation se termine et on voit apparaître l'invite de commande
+On se connecte en root
+
+7 - On formate la partition avec un système de fichier (btrfs ou ext4)
+# mkfs -t btrfs /dev/sda3
+
+8 - On ouvre le fichier fstab
+On copie/colle la ligne :
+/dev/sda2		/		btrfs		defaults		0		0
+On la transforme en :
+/dev/sda3		/home		btrfs		defaults		0		0
+
+On doit avoir ceci en bas du fichier :
+/dev/sda2		/				btrfs		defaults		0		0
+/dev/sda3		/home		btrfs		defaults		0		0
+
+9 - On reboote
+
+10 - On crée dans le répertoire /home un dossier pour l'utilisateur jpantinoux
+# mkdir jpantinoux 
+On donne l'utilisateur et le groupe à jpantinoux
+# chown -R jpantinou:jpantinoux jpantinoux
+
+11 - On peut tester en se connectant sur cet utilsateur
+# su - jpantinoux
+
+Et voilà
+
+--- Fin ---

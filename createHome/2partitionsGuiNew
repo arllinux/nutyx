@@ -21,8 +21,8 @@ On passe sur la console avec Ctrl + F1
 
 3 - On lance cfdisk
 On choisi l'option redimentionner :
-Nouvelle taille : 11G que l'on veut laisser pour /
-On crée une nouvelle partition avec l'espace restant (dans cet exemple 18G)
+Nouvelle taille : 11G que l'on veut garder pour /
+On crée une nouvelle partition /dev/sda3 avec l'espace restant (dans cet exemple 18G)
 On quitte cfdisk
 
 4 - On applique un système de fichier btrfs à la nouvelle partition /dev/sda3
@@ -38,7 +38,7 @@ On entre dans /home
 
 7 - On ouvre le fstab du système installé sur le disque dur
 Entre temps j'ai récupéré vim (get vim)
-# vim /mnt/etc/fstab
+# vim /etc/fstab
 ...
 /dev/sda3	/home	btrfs	defaults	0	0
 ...

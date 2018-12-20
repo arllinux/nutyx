@@ -1,0 +1,72 @@
+# Modifier sur une NuTyX l'installation de base qui se fait sur une seule
+# partition. Séparer le /home.
+
+On considère que l'installation est déjà faite et le bureau paramétré.
+On a déjà des données, des photos des vidéos, etc...
+
+Le disque
+Dans notre exemple nous allons partir d'un disque de 30 Go
+
+Partitionement lors de l'installation :
+/dev/sda
+/dev/sda1    swap    2G
+/dev/sda2    btrfs   28G    /
+
+Pour créer une partition /home séparée il faut :
+
+1 - Démarrer sur le disque dur
+
+2 - On ne se connecte pas quand on arrive sur la fenêtre de connection
+On passe sur la console avec Ctrl + F1
+
+3 - On lance cfdisk
+On choisi l'option redimentionner :
+Nouvelle taille : 11G que l'on veut laisser pour /
+On crée une nouvelle partition avec l'espace restant (dans cet exemple 18G)
+On quitte cfdisk
+
+4 - On applique un système de fichier btrfs à la nouvelle partition /dev/sda3
+# mkfs -t btrfs /dev/sda3
+
+5 - On lance une terminal
+La partition /dev/sda2 est déjà montée
+On entre dans /home
+# cd /home
+
+6 - On fait une archive compressée des utilisateurs et on la déplace à la racine :
+# tar xf ../users.tar *
+
+7 - On ouvre le fstab du système installé sur le disque dur
+Entre temps j'ai récupéré vim (get vim)
+# vim /mnt/etc/fstab
+...
+/dev/sda3	/home	btrfs	defaults	0	0
+...
+
+On redémarre
+# reboot
+On ne se connecte pas quand on arrive sur la fenêtre de connection
+On passe sur la console avec Ctrl + F1
+
+8 - On vérifie que le /home est bien sur la partition /dev/sda3
+
+9 - On va dans le répertoire /home qui est vide
+# cd /home
+On déplace l'archive qui est à la racine dans /home
+# mv /users.tar .
+On désarchive
+# tar xf users.tar
+On vérifie que le dossiers du ou des utilisateurs ont les bons droits :
+# drwxr-xr-x 92 jpantinoux jpantinoux 4,0K déc.  19 18:19 jpantinoux
+On supprime l'archive
+# rm users.tar
+
+11 - On revient vers la fenêtre de connection :
+Alt + F7 sur une machine physique
+Ctrl + F7 sur VirtualBox
+
+12 - On doit retrouver son environnement de bureau et nos données en place.
+
+--- Fin ---
+
+

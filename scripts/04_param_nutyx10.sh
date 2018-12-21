@@ -59,7 +59,9 @@ WAYGRUB='/boot/grub/'
          tar xvf $MOZ
          rm $MOZ
          chown -R $nom:$nom /home/$nom/.mozilla
- 
+
+
+
          # Thunderbird	
          # cd /home/$nom/
          # wget $SLO10rc/$THUN

@@ -1,10 +1,12 @@
 #!/bin/bash
 #
-# param_cairo.sh
+# 05_param_cairo_nutyx.sh
 # 
-# Jean-Pierre Antinoux - avril 2015
+# Jean-Pierre Antinoux - Décembre 2018
 
 CWD=$(pwd)
+CAIROWAY='http://sloteur.free.fr/arllinux'
+CAIRO='cairo-dock-nutyx.tar.gz'
 
 # Vérification de la syntaxe de l'utilisateur principal
     # Vérification du nom d'utilisateur
@@ -17,9 +19,9 @@ CWD=$(pwd)
         if [ $? = "0" ]
         then
          cd /home/$nom/.config/
-         wget http://sloteur.free.fr/arllinux/cairo-dock-jp.tar.gz
-         tar xvf cairo-dock-jp.tar.gz
-         rm cairo-dock-jp.tar.gz
+         wget $CAIROWAY/$CAIRO
+         tar xvf $CAIRO
+         rm $CAIRO
          chown -R $nom:$nom /home/$nom/.config/cairo-dock
     else
        echo "Ce nom d'utilisateur n'existe pas. Réessayez !"

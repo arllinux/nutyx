@@ -168,14 +168,16 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        echo "==             Remplacemnt de fichiers .desktop              =="
        echo "==============================================================="
+			 # Voir si le message unary operator expected apparait toujours :
+			 # J'ai remplacé [ $? "0" ] par [ "$?" 0 ] lignes 174 et 180
 			 cat listechoix | grep firefox
-  		 if [ $? "0" ]; then
+  		 if [ "$?" 0 ]; then
          cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
          cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
 	       rm $CWD/firefox
        fi
 			 cat listechoix | grep clementine
-  		 if [ $? "0" ]; then
+  		 if [ "$?" 0 ]; then
          cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
          cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
 	       rm $CWD/clementine

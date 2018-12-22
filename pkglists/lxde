@@ -2,7 +2,7 @@
 # Dès l'installation de base terminée.
 # lxde
 lxde
-lxde-extras
+lxde-extra
 lxdm
 wget
 zip

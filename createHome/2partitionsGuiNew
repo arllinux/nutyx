@@ -85,3 +85,23 @@ On se connecte en simple utilisateur.
 
 12 - On doit retrouver son environnement de bureau et nos données en place.
 
+########
+# Note :
+########
+
+La commande df ne prends pas en compte la modication :
+
+Filesystem     Type      Size  Used Avail Use% Mounted on
+/dev/sda2      btrfs      28G  3,7G   23G  15% /
+tmpfs          tmpfs     999M  640K  998M   1% /run
+devtmpfs       devtmpfs  996M     0  996M   0% /dev
+/dev/sda3      btrfs      16G   60M   14G   1% /home
+
+Par conte la commade lsblk voit bien la partition :
+
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 29,7G  0 disk 
+├─sda1   8:1    0    2G  0 part [SWAP]
+├─sda2   8:2    0   12G  0 part /
+└─sda3   8:3    0 15,7G  0 part /home
+sr0     11:0    1 1024M  0 rom  

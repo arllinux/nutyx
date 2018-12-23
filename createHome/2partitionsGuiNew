@@ -45,7 +45,7 @@ On crée une nouvelle partition :
 On quitte cfdisk
 
 6 - On applique un système de fichier btrfs à la nouvelle partition /dev/sda3
-# mke2fs -t btrfs /dev/sda3
+# mkfs -t btrfs /dev/sda3
 
 7 - On ouvre le fstab.
 Entre temps j'ai récupéré vim (get vim)
@@ -58,6 +58,8 @@ On redémarre
 # reboot
 On ne se connecte pas quand on arrive sur la fenêtre de connection
 On passe sur la console avec Ctrl + F1
+On repasse en :
+# init 3
 
 8 - On vérifie que le /home est bien sur la partition /dev/sda3
 # lsblk
@@ -77,6 +79,9 @@ On supprime l'archive
 
 11 - On revient vers la fenêtre de connection :
 Ctrl + F7 sur VirtualBox
+On repasse en :
+# init 5
+On se connecte en simple utilisateur.
 
 12 - On doit retrouver son environnement de bureau et nos données en place.
 

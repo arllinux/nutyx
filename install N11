@@ -1,0 +1,25 @@
+jpantinoux [ ~ ]$ systemctl list-unit-files | grep enabled
+autovt@.service                         enabled  
+dbus-org.freedesktop.network1.service   enabled
+dbus-org.freedesktop.resolve1.service   enabled  
+getty@.service                          enabled  
+systemd-networkd-wait-online.service    enabled  
+systemd-networkd.service                enabled  
+systemd-resolved.service                enabled  
+systemd-timesyncd.service               enabled  
+systemd-networkd.socket                 enabled  
+machines.target                         enabled  
+remote-fs.target                        enabled  
+
+jpantinoux [ ~ ]$ systemctl list-unit-files | grep NetworkManager
+NetworkManager-dispatcher.service       disabled 
+NetworkManager-wait-online.service      disabled 
+NetworkManager.service                  disabled 
+
+jpantinoux [ ~ ]$ systemctl enable NetworkManager
+Created symlink /etc/systemd/system/dbus-org.freedesktop.NetworkManager.service → /lib/systemd/system/NetworkManager.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/NetworkManager.service → /lib/systemd/system/NetworkManager.service.
+Created symlink /etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service → /lib/systemd/system/NetworkManager-dispatcher.service.
+Created symlink /etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service → /lib/systemd/system/NetworkManager-wait-online.service.
+
+jpantinoux [ ~ ]$ systemctl start NetworkManager

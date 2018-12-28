@@ -23,13 +23,13 @@ APPWAY="/usr/share/applications"
     then
       echo "Pour exécuter ce script il faut être l'utilisateur root !"
  else
- 
+
  	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
     echo "Fichier de conf du network manager"
     cp $CWD/../network/network /etc/sysconfig/network
 
    # Propose un choix de paquets et permet d'en sélectionner de nouveaux - Février
-   # Vérifie si les fichiers cités existent et les supprime. 
+   # Vérifie si les fichiers cités existent et les supprime.
 	  if [ -f "firefox" ];then
 	    rm firefox
     fi
@@ -147,7 +147,7 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        PAQUETSAJ=$(egrep -v '(^\#)|(^\s+$)' $CWD/listechoix)
        cards -f install $PAQUETSAJ
-			 
+
 			 # Installe flcards (l'interface graphique de cards)
        # cards -f install flcards
 
@@ -163,7 +163,7 @@ APPWAY="/usr/share/applications"
        echo "==============================================================="
        PAQUETSSUPP=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/sup_paquets)
        cards remove $PAQUETSSUPP
-  
+
        # Mise à jour de fichiers .desktop traduits partiellement
        echo "==============================================================="
        echo "==             Remplacemnt de fichiers .desktop              =="
@@ -173,17 +173,17 @@ APPWAY="/usr/share/applications"
 			 cat listechoix | grep firefox
   		 if [ "$?" 0 ]; then
          cp $APPWAY/firefox.desktop $APPWAY/firefox.desktop.old
-         cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop 
+         cp $CWD/../desktop/firefox.desktop $APPWAY/firefox.desktop
 	       rm $CWD/firefox
        fi
 			 cat listechoix | grep clementine
   		 if [ "$?" 0 ]; then
          cp $APPWAY/clementine.desktop $APPWAY/clementine.desktop.old
-         cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop 
+         cp $CWD/../desktop/clementine.desktop $APPWAY/clementine.desktop
 	       rm $CWD/clementine
        fi
          cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
-         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+         cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop
        update-desktop-database
 
       echo "================================================================="
@@ -192,7 +192,7 @@ APPWAY="/usr/share/applications"
       echo "================================================================="
   else
          # cp $APPWAY/flcards.desktop $APPWAY/flcards.desktop.old
-         # cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop 
+         # cp $CWD/../desktop/flcards.desktop $APPWAY/flcards.desktop
        # update-desktop-database
      echo "================================================================="
      echo "===              La procédure à été interrompue               ==="

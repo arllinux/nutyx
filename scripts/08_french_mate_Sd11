@@ -1,0 +1,18 @@
+#!/bin/bash
+# 08_french_mate_Sd11 
+
+# Liste les paquets installés et extrait seulement les noms pour les mettre dans un fichier "list"
+cards list | cut -d " " -f2 | cut -d "." -f1 > list
+
+# Extrait les noms des paquets dans la variable "LIST"
+LIST=$(egrep -v '^\#' list)
+
+# Installe chaque françisation des paquets listés.	
+for I in $LIST
+  do
+  cards install $I.fr
+done
+
+# Supprime le fichier "list"
+rm list
+

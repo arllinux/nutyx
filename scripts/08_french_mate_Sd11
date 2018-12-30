@@ -16,3 +16,6 @@ done
 # Supprime le fichier "list"
 rm list
 
+# Version proposée par Thierry
+# for i in `cards list | cut -d " " -f2 | cut -d "." -f1` ; do sudo cards install $i.fr ; done
+

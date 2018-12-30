@@ -1,0 +1,13 @@
+# Au premier lancement de virtualBox : erreur
+# Plus précisément VB se lance mais c'est lors du lancement de l'iso virtualisé
+# qu'il y a une erreur.
+# 30 décembre 2018 sur systemV 10.5
+Pour régler le problème :
+
+# VBoxManage list extpacks
+# VBoxManage extpack uninstall Oracle VM VirtualBox Extension Pack
+# VBoxManage extpack cleanup
+
+Ensuite
+# up virtualbox
+

@@ -28,8 +28,8 @@ if [ $USER != "root" ]
      read -p 'Votre choix de bureau : ' num
      if [ $num = "1" ]
        then
-        PAQUETS4=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/paquets4)
-        cards install $PAQUETS4
+        PAQUETS1=$(egrep -v '(^\#)|(^\s+$)' $CWD/../pkglists/mate)
+        cards install $PAQUETS1
       else
       if [ $num = "2" ]
         then

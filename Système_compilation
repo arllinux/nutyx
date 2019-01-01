@@ -1,0 +1,110 @@
+# Compiller dans NyTyX
+
+1 - Installer les outils de développement
+$ get cards.devel
+
+# Récupérer les collections indispensables
+$ sudo ports -u base
+$ sudo ports -u cli
+$ sudo ports -u gui
+
+Il s'agit des archives compréssées qui sont sur le serveur : http://downloads.nutyx.org/
+
+Voici où elles sont placées dans le système hôte :
+
+[jpantinoux@nutyx:/usr/ports] $ ll
+total 0
+drwxr-xr-x 1 root root 3,5K déc.  27 21:12 base		473 Mo
+drwxr-xr-x 1 root root 7,9K déc.  27 21:22 cli		615 Mo
+drwxr-xr-x 1 root root  11K déc.  27 21:33 gui		689 Mo
+
+# Cette commande affiche la configuration par défaut de NuTyX
+$ cards config
+18 lignes qui pointent sur les dépots sur internet.
+
+Exemple pour les lignes qui concernent mate :
+dir /var/lib/pkg/depot/mate-extra|http://downloads.nutyx.org/
+dir /var/lib/pkg/depot/mate|http://downloads.nutyx.org/
+
+dir : indique là où il faut placer sur le disque ce qui est rapatrié du serveur.
+/var/lib/pkg/depot/mate --> chemin du dossier dans la machine hôte
+http://downloads.nutyx.org --> Serveur où il faut chercher 
+Pour caja le chemin est :
+http://downloads.nutyx.org/x86_64/10.5.caja/
+À l'intérieur se trouve le Pkgfile, les archives .cards.tar.xz de caja et des langues
+
+# Je vais maintenant configurer cards pourqu'il prenne sa source dans la machine hôte au lieu du serveur
+Je fais une copie du cards.conf
+$ sudo cp /etc/cards.conf /etc/cards.conf_old
+
+# On fait les modifs en conséquense
+$ sudo vim cards.conf
+dir /usr/ports/base
+dir /usr/ports/cli
+dir /usr/ports/gui
+...
+base /usr/ports/base
+
+# On voit ce qui change
+$ cards config
+1 Dossier:  /usr/ports/gui
+2 Dossier:  /usr/ports/cli
+3 Dossier:  /usr/ports/base
+Liste des dossiers pour le système de base: /usr/ports/base
+Binaires : x86_64
+Locale   : fr
+
+# On peut lister les paquets accéqqibles dans les ports (machine hôte)
+$ cards list -p
+
+# On peut compter le nombre de paquets
+$ cards list -p | wc -l
+1123 paquet
+
+$ check
+# Nous indique que tous les paquets n'existent plus. Cette commande cherche sur le serveur.
+
+# Affichage de l'ordre de compilation pour toutes les recette de ces collections
+Si le numéro en début de ligne est 0 : cela signifie que le paquet n'a pas besoin de dépendances
+Si le numéro en début de ligne est 1 : cela signifie que le paquet a besoin d'une dépendance.
+# cards level
+
+# Connaître les dépendances d'un paquet.
+$ cards deptree meson
+0) meson 
+  1) ninja
+    2) python
+      3) sqlite
+      3) expat
+      3) libffi
+  1) python-setuptools
+
+# Notion de groupe à préciser.
+
+# Pour isoler la nutyx de compilation
+Le script buid-collection
+
+# Ce que fait le script
+- Installer une NuTyx dans un dossier
+- Rentrer dans ce dossier
+- Configurer
+- Regarder dans la collection ce qu'il faut compiler
+- Quand terminé il supprime la Nutyx.
+
+# Nous allons prendre un paquet existant : lxde
+
+$ get git et rsync
+
+# Il faut définir ces variables
+$ ARCH='uname -m'
+$ VERSION=fixed
+$ BRANCH=fixed
+$ PROJECT=lxde
+$ RSYNC=(base cli gui lxde lxde-extra)
+
+# Il faut créer le répertoire de travail
+$ mkdir -pv /home/$USER/git/$VERSION
+
+
+https://www.youtube.com/watch?v=NTK5YCdkS10
+Arret à 45 mn environ.

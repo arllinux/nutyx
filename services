@@ -1,0 +1,23 @@
+# Liste des services en route au 27/12/2018
+J'ai ajouté ntpd.service
+et j'ai relancé
+systemd-timesyncd.service 
+
+systemctl list-file-units | grep enabled
+autovt@.service                             enabled  
+dbus-org.freedesktop.network1.service       enabled  
+dbus-org.freedesktop.NetworkManager.service enabled  
+dbus-org.freedesktop.nm-dispatcher.service  enabled  
+dbus-org.freedesktop.resolve1.service       enabled  
+getty@.service                              enabled  
+NetworkManager-dispatcher.service           enabled  
+NetworkManager-wait-online.service          enabled  
+NetworkManager.service                      enabled  
+ntpd.service                                enabled  
+systemd-networkd-wait-online.service        enabled  
+systemd-networkd.service                    enabled  
+systemd-resolved.service                    enabled  
+systemd-timesyncd.service                   enabled  
+systemd-networkd.socket                     enabled  
+machines.target                             enabled  
+remote-fs.target                            enabled  

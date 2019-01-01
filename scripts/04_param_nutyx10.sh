@@ -71,5 +71,5 @@ WAYGRUB='/boot/grub/'
  
       else
          echo "Ce nom d'utilisateur n'existe pas. Réessayez !"
-      fi
+     fi
 exit 0

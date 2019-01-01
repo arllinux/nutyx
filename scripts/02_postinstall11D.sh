@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# 02_postInstall10.sh
-# Jean-Pierre Antinoux - Janvier 2018
+# 02_postInstall11D.sh
+# Jean-Pierre Antinoux - Janvier 2018 - Décembre 2018
 
-# Ce script permet d'automatiser la post install de la NuTyx 10.0
+# Ce script permet d'automatiser la post install de la NuTyx 11.0
 # Il ajoute les outils que je trouve nécessaires, ajuste le fichier network
-# (obsolète) propose 2 installations d'outils pour un poste de travail
+# (obsolète) propose un choix d'installations d'outils pour un poste de travail
 
 # Jean-Pierre Antinoux - Janvier 2018 - Février 2018
 # Ajout d'une liste de choix pour les logiciels plutôt que 2 packs
@@ -25,8 +25,8 @@ APPWAY="/usr/share/applications"
  else
  
  	 # Mettre en place le fichier de conf adapté pour NetworkManagerœ
-    echo "Fichier de conf du network manager"
-    cp $CWD/../network/network /etc/sysconfig/network
+   # echo "Fichier de conf du network manager"
+   #  cp $CWD/../network/network /etc/sysconfig/network
 
    # Propose un choix de paquets et permet d'en sélectionner de nouveaux - Février
    # Vérifie si les fichiers cités existent et les supprime. 

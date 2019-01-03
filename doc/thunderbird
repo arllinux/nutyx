@@ -1,0 +1,6 @@
+# Si la syncro des carnets d'adresse et agenda se bloquent.
+
+network.cookie.same-site.enabled
+
+Passer la valeur à false
+

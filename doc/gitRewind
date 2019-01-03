@@ -1,0 +1,64 @@
+# Si on souhaite revenir en arrière dans le versionning
+
+# git log
+
+commit 67352873cb533531a290da4b60f614496121e07e
+Merge: a6b0739 c7e30f9
+Author: root <jeanpierre.antinoux@free.fr>
+Date:   Wed Jan 2 02:53:50 2019 +0100
+
+    Merge branch 'development' of https://github.com/arllinux/nutyx into development
+
+commit a6b0739f8b986a6eed8c4992f73e9e22a172f440
+Author: root <jeanpierre.antinoux@free.fr>
+Date:   Wed Jan 2 02:53:26 2019 +0100
+
+    Personnalisation du terminal
+
+commit c7e30f9c5da5396291a576e5c29674f7298a37db
+Merge: 24890a3 517e8a0
+Author: root <jeanpierre.antinoux@free.fr>
+Date:   Tue Jan 1 03:22:54 2019 +0100
+
+    Merge branch 'development' of https://github.com/arllinux/nutyx into development
+...
+...
+
+On cherche à quel moment on veut revenir :
+Ici les modifications non désirée concernent la personnalisation du terminal.
+Il nous faut donc revenir à la modification précédante :
+
+Merge branch 'development' of https://github.com/arllinux/nutyx into development
+du 1er janvier 2019
+
+Pour cela il nous faut faire :
+# git checkout c7e30f9c5da5396291a576e5c29674f7298a37db
+Note : extraction de 'c7e30f9c5da5396291a576e5c29674f7298a37db'.
+
+Vous êtes dans l'état « HEAD détachée ». Vous pouvez visiter, faire des modifications
+expérimentales et les valider. Il vous suffit de faire une autre extraction pour
+abandonner les commits que vous faites dans cet état sans impacter les autres branches
+
+Si vous voulez créer une nouvelle branche pour conserver les commits que vous créez,
+il vous suffit d'utiliser « checkout -b » (maintenant ou plus tard) comme ceci :
+
+  git checkout -b <nom-de-la-nouvelle-branche>
+
+HEAD est maintenant sur c7e30f9 Merge branch 'development' of https://github.com/arllinux/nutyx into development
+
+
+ # git status
+HEAD détachée sur c7e30f9
+rien à valider, la copie de travail est propre
+
+# git checkout -b temp
+Basculement sur la nouvelle branche 'temp'
+
+# git checkout master
+Basculement sur la branche 'master'
+Votre branche est à jour avec 'origin/master'.
+
+
+# git branch -d temp
+Branche temp supprimée (précédemment c7e30f9).
+

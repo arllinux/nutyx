@@ -46,12 +46,12 @@ WAYGRUB='/boot/grub/'
 					 rm $LXDM
          fi
 
-         # dconf
-         cd /home/$nom/.config
-         wget $SLO10rc/$DCONF
-         tar xvf $DCONF
-         rm $DCONF
-         chown -R $nom:$nom /home/$nom/.config/dconf
+#          # dconf
+#          cd /home/$nom/.config
+#          wget $SLO10rc/$DCONF
+#          tar xvf $DCONF
+#          rm $DCONF
+#          chown -R $nom:$nom /home/$nom/.config/dconf
  
          # Firefox
          cd /home/$nom/

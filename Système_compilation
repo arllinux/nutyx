@@ -54,7 +54,7 @@ Liste des dossiers pour le système de base: /usr/ports/base
 Binaires : x86_64
 Locale   : fr
 
-# On peut lister les paquets accéqqibles dans les ports (machine hôte)
+# On peut lister les paquets accessibles dans les ports (machine hôte)
 $ cards list -p
 
 # On peut compter le nombre de paquets
@@ -80,6 +80,8 @@ $ cards deptree meson
   1) python-setuptools
 
 # Notion de groupe à préciser.
+Un ensemble de paquet qui appartient à un paquet de base.
+Chaque paquet est subdivisé en groupe.
 
 # Pour isoler la nutyx de compilation
 Le script buid-collection
@@ -108,3 +110,5 @@ $ mkdir -pv /home/$USER/git/$VERSION
 
 https://www.youtube.com/watch?v=NTK5YCdkS10
 Arret à 45 mn environ.
+
+

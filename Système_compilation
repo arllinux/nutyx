@@ -53,6 +53,7 @@ $ cards config
 Liste des dossiers pour le système de base: /usr/ports/base
 Binaires : x86_64
 Locale   : fr
+# Nous sommes passé en mode source
 
 # On peut lister les paquets accessibles dans les ports (machine hôte)
 $ cards list -p
@@ -79,9 +80,13 @@ $ cards deptree meson
       3) libffi
   1) python-setuptools
 
-# Notion de groupe à préciser.
+# Notion de groupe. 
 Un ensemble de paquet qui appartient à un paquet de base.
 Chaque paquet est subdivisé en groupe.
+Si on veut voir par exemple les groupes de gcc :
+Il faut d'abord recommenter dans cards.conf :
+Les trois lignes qui pointent vers /usr/ports
+...
 
 # Pour isoler la nutyx de compilation
 Le script buid-collection
@@ -93,8 +98,9 @@ Le script buid-collection
 - Regarder dans la collection ce qu'il faut compiler
 - Quand terminé il supprime la Nutyx.
 
-# Nous allons prendre un paquet existant : lxde
+# Nous allons prendre une collection existante : lxde
 
+# Les outils dont nous avons besoin.
 $ get git et rsync
 
 # Il faut définir ces variables
@@ -102,13 +108,79 @@ $ ARCH='uname -m'
 $ VERSION=fixed
 $ BRANCH=fixed
 $ PROJECT=lxde
+$ COLLECTION=lxde
 $ RSYNC=(base cli gui lxde lxde-extra)
 
-# Il faut créer le répertoire de travail
+# Tous les dossiers nécessaire pour la compilation se trouvent sous : 
+/home/$USER/git/$VERSION
+et
+/srv/www
+
+# Il faut créer le répertoire de travail dans notre /home
+
 $ mkdir -pv /home/$USER/git/$VERSION
+mkdir: created directory '/home/moi/git'
+mkdir: created directory '/home/moi/git/fixed'
+
+# Récupération des ports de "$COLLECTION" depuis le projet git
+$ git clone -b $BRANCH git://git.tuxfamily.org/gitroot/nutyx/$PROJECT.git ~/git/$VERSION/$PROJECT
+Traduction :
+$ git clone -b fixed git://git.tuxfamily.org/gitroot/nutyx/lxde.git /home/jpantinoux/git/fixed/lxde
+
+# On crée maintenant les dossiers nécessaires pour le script dans /srv :
+$ sudo mkdir -pv \
+/srv/www/{logs/$ARCH/$VERSION/$COLLECTION,$ARCH/$VERSION/$COLLECTION,sources}
+
+# Récupération des collections définies dans la variable $RSYNC
+# Tapez cette commande à chaque fois que vous souhaitez mettre à jour votre copie des collections
+# définies par la variable $RSYNC dans leur état original.
+$ for i in ${RSYNC[@]}
+  do
+    sudo rsync -av --delete rsync://downloads.nutyx.org/nutyx/$ARCH/$VERSION/$i/ \
+	  /srv/www/$ARCH/$VERSION/$i/
+	done
+
+# Le fichier de configuration /etc/fstab
+$ sudo echo "
+#    PROJECT $PROJECT
+#    ##   COLLECTION $COLLECTION
+#    ###  VERSION $VERSION
+#    #### GIT
+#    /home/$USER/git/$VERSION/$PROJECT \
+#    /$VERSION/$COLLECTION/root/$PROJECT none noauto,bind" \
+#    | sudo tee --append /etc/fstab
+
+Va placer :
+/home/jpantinoux/git/fixed/lxde /fixed/lxde/root/lxde none noauto,bind 
+à la fin du fichier fstab
+
+# Finalisation et manipulations à reproduire
+
+# Vous êtes enfin prêt pour travailler avec le script de compilation. La commande ci-dessous est à reproduire :
+
+ La première fois.
+ Quand vous cassez votre chroot et donc par conséquent vos binaires.
+ Quand vous souhaitez revenir sur les collections originales. 
+
+$ for i in ${RSYNC[@]}
+	do
+   sudo rsync -av --delete rsync://downloads.nutyx.org/nutyx/$ARCH/$VERSION/$i/ \
+	 /srv/www/$ARCH/$VERSION/$i/
+	done
+
+# Lancement du script build-collection
+$ sudo build-collection /$VERSION/$COLLECTION
+
+CHROOT: <your collection>
+COLLECTION: <your collection>
+VERSION: <your version>
+The command: KERNEL=NONE LFS=/<your version>/<your collection> DEPOT=/DEPOT install-nutyx
+DEVEL: cards.devel &&
+cd /root/<your collection> &&
+bash scripts/<your collection> -a &&
+bash scripts/<your collection>-extra -a  OK ? (y)
 
 
 https://www.youtube.com/watch?v=NTK5YCdkS10
-Arret à 45 mn environ.
-
+Arret à 1 h 08 mn environ.
 

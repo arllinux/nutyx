@@ -1,0 +1,32 @@
+# Pour l'installation de la 10.x rolling ou fixed
+# Dès l'installation de base terminée,
+mate
+mate-extra
+lxdm
+wget
+zip
+unzip
+tar
+rsync
+pciutils
+xdg-user-dirs
+gvfs
+alsa-utils
+alsa-plugins
+network-manager-applet
+#dconf-editor
+xfce4-elementary-icon-theme
+#
+usbutils
+dejavu-ttf
+pigz
+sound-theme-freedesktop
+ntfs-3g
+xorg-xdpyinfo
+lm-sensors
+# gparted
+xorg-setxkbmap
+ntp
+inxi
+htop
+

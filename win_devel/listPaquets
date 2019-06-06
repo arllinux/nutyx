@@ -1,0 +1,96 @@
+#!/bin/bash
+rm listechoix
+touch listechoix
+cmd=(dialog --separate-output --checklist "Sélectionner ou désélectionner avec la barre d'espace :" 22 76 16)
+# any option can be set to default to "on" or "off"
+options=(1 "libreoffice" on
+         2 "firefox" on
+         3 "brasero" on
+         4 "vlc" on
+         5 "clementine" on
+         6 "gimp" on
+         7 "simple-scan" off
+         8 "simplescreenrecorder" off
+         9 "abiword" off
+        10 "gnumeric" off
+        11 "midori" off
+        12 "claws-mail" off
+        13 "thunderbird" off
+        14 "transmission" on
+        15 "filezilla" on
+        16 "mypaint" off
+        17 "shotwell" off
+        18 "inkscape" off
+        19 "darktable" off
+        20 "blender" off
+        21 "geany" off)
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+    case $choice in
+        1)
+            echo "LibreOffice" >> listechoix
+            ;;
+        2)
+            echo "firefox" >> listechoix
+            ;;
+        3)
+            echo "brasero" >> listechoix
+            ;;
+        4)
+            echo "vlc" >> listechoix
+            ;;
+        5)
+            echo "clementine" >> listechoix
+            ;;
+        6)
+            echo "gimp" >> listechoix
+            ;;
+        7)
+            echo "simple-scan" >> listechoix
+            ;;
+        8)
+            echo "simplescreenrecorder" >> listechoix
+            ;;
+        9)
+            echo "abiword" >> listechoix
+            ;;
+        10)
+            echo "gnumeric" >> listechoix
+            ;;
+        11)
+            echo "midori" >> listechoix
+            ;;
+        12)
+            echo "claws-mail" >> listechoix
+            ;;
+        13)
+            echo "thunderbird" >> listechoix
+            ;;
+        14)
+            echo "transmission" >> listechoix
+            ;;
+        15)
+            echo "filezilla" >> listechoix
+            ;;
+        16)
+            echo "mypaint" >> listechoix
+            ;;
+        17)
+            echo "shotwell" >> listechoix
+            ;;
+        18)
+            echo "inkscape" >> listechoix
+            ;;
+        19)
+            echo "darktable" >> listechoix
+            ;;
+        20)
+            echo "blender" >> listechoix
+            ;;
+        21)
+            echo "geany" >> listechoix
+            ;;
+    esac
+done

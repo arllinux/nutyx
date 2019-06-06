@@ -29,7 +29,10 @@ else
       echo " !!! Erreur lors de la suppression du message de configuration"
       echo " >-----------------------------------------------------------<"
     fi
-    
+		
+		bash -c 'git config --global user.email "sloteur@free.fr"'
+		bash -c 'git config --global user.mane "sloteur"'
+		
 fi
 
 exit 0

@@ -1,0 +1,51 @@
+# !!!!!!!!!!!!!!!!!!!
+# Gestion de systemD
+# !!!!!!!!!!!!!!!!!!!
+
+Pour voir les logs
+# journalctl
+
+Comme tail -f
+# journalctl -f
+
+Filtrer par service
+# journalctl -u crond
+
+Par PID
+# journalctl _PID=1
+
+Par programme
+# journalctl /usr/bin/sshd
+
+Par niveau de log (ici erreurs
+# journalctl -p err
+
+Combinaison de toutes les infos
+# journalctl -f /usr/sbin/lspci -p info
+
+On peut aussi filtrer les logs par date avec --since et --until.
+Il faut mettre la date au format YYYY-MM-DD HH:MM:SS
+Par exemple depuis 15h le 12/28/2018 :
+# journalctl --since "2018-12-28 15:00:00"
+
+Ou jusqu'à 22h le 10/02/2016 :
+Code BASH :
+# journalctl --until "2016-02-10 22:00:00"
+
+Ou dans cet intervalle en combinant les deux :
+# journalctl --since "2016-02-10 21:00:00" --until "2016-02-10 22:00:00"
+
+On peut parfois utiliser les dates avec des adverbes de temps (exemple depuis hier)
+# journalctl --since yesterday
+
+Ou une durée (il y a 10 minutes) :
+# journalctl --since "10 minutes ago"
+
+Limiter la taille du journal
+On peut imiter la taille maximum du journal (par défaut à 10% de la taille du système de fichier).
+Pour la fixer à 500 Mo par exemple, on édite le fichier /etc/systemd/journald.conf :
+# SystemMaxUse=500M
+
+En fixant une limite par fichier, on a un équivalent de logrotate (par défaut, il garde 7 rotations) :
+# SystemMaxUse=500M
+# SystemMaxFileSize=100M

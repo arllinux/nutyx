@@ -1,4 +1,4 @@
-# 05 janvier 2018
+
 
 =================================================
 # Si vous souhaitez un compte root (facultatif)
@@ -24,7 +24,7 @@ Si des paquets apparaisse à la suite de la commande "check"
 Ajouter quelques outils indispensables
 # get vim git
 
-Récupérer les scripts et la documentation : 
+Récupérer les scripts et la documentation :
 # git clone http://github.com/arllinux/nutyx
 # cd nutyx/scripts
 #

@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Script créé en janvier 2018 par JPA
+# Modifications vers fixed et rolling en décembre 2018
 CWD=$(pwd)
 # /root/nutyx/doc/chroot
 
@@ -19,8 +20,8 @@ if [ $USER != "root" ]
     echo "************************************************************"
     echo " Si le résultat de la commande ne convient pas :  taper 1 : "
     echo " Si le résultat de la commande vous convient deux choix   : "
-    echo " Installer une chroot pour version stable :       taper 2 : "
-    echo " Installer une chroot pour version development :  taper 3 : "
+    echo " Installer une chroot pour version fixed :        taper 2 : "
+    echo " Installer une chroot pour version rolling :      taper 3 : "
     echo "************************************************************"
     read -p" Taper votre choix : 1 - 2 ou 3 : " choix
     echo "********************************"
@@ -33,29 +34,29 @@ if [ $USER != "root" ]
     elif [ $choix = "2" ]
       then
       
-    # Version stable 
+    # Version fixed
     echo " **********************************************"
-    echo " Vous avez choisi d'installer une version STABLE"
+    echo " Vous avez choisi d'installer une version FIXED"
     echo " Si ce n'est pas le cas faites Ctrl + C"
     echo " Si c'est votre choix, tapez Entrée :"
     read -p"***********************************************"
-    VERSION="stable" install-nutyx
+    VERSION="fixed" install-nutyx
     echo " *************************************"
-    echo " Vous aller installer une Nutyx STABLE"
+    echo " Vous aller installer une Nutyx FIXED"
     read -p" ************************************"
     install-nutyx -ec
     elif [ $choix = "3" ]
       then  
 		
-    # Version development
+    # Version rolling
     echo " ***************************************************"
-    echo "Vous avez choisi d'installer la version DEVELOPMENT"
+    echo "Vous avez choisi d'installer la version ROLLING"
     echo " Si ce n'est pas le cas faites Ctrl + C"
     echo " Si c'est votre choix, tapez Entrée :"
     read -p" **************************************************"
-    VERSION="development" install-nutyx
+    VERSION="rolling" install-nutyx
     echo " ***********************************************"
-    echo " Vous aller installer une Nutyx de DEVELOPEMENT"
+    echo " Vous aller installer une Nutyx de ROLLING"
     read -p" **********************************************"
     install-nutyx -ec
     else

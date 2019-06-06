@@ -1,0 +1,107 @@
+# Modifier sur une NuTyX l'installation de base qui se fait sur une seule
+# partition en btrfs.
+# Séparer le /home.
+
+Le test est fait sur une machine virtuelle "Virtual Box".
+L'environnement de travail est "mate"
+
+On considère que l'installation est déjà faite et le bureau paramétré.
+On a déjà des données, des photos des vidéos, etc...
+
+Le disque
+Dans notre exemple nous allons partir d'un disque de 30 Go
+
+Partitionement lors de l'installation :
+/dev/sda
+/dev/sda1    swap    2G
+/dev/sda2    btrfs   28G    /
+
+####################################################################
+# Attention !
+# Cette procédure n'est valable qu'avec un système de fichier btrfs.
+####################################################################
+
+Pour créer une partition /home séparée il faut :
+
+1 - Démarrer sur le disque dur (oui, oui)
+
+2 - On ne se connecte pas quand on arrive sur la fenêtre de lxdm
+On passe sur la console avec Ctrl + F1
+On passe en init 3 (mode non graphique)
+# init 3
+
+3 - La partition /dev/sda2 est déjà montée
+On entre dans /home
+# cd /home
+
+4 - On fait une archive compressée des utilisateurs et on la déplace à la racine :
+# tar cf ../users.tar *
+
+5 - On lance cfdisk
+On choisi l'option redimentionner /dev/sda2 :
+Nouvelle taille : 10G que l'on veut garder pour /
+On crée une nouvelle partition :
+/dev/sda3 avec l'espace restant (dans cet exemple 18G)
+On quitte cfdisk
+
+6 - On applique un système de fichier btrfs à la nouvelle partition /dev/sda3
+# mkfs -t btrfs /dev/sda3
+
+7 - On ouvre le fstab.
+Entre temps j'ai récupéré vim (get vim)
+# vim /etc/fstab
+...
+/dev/sda3	/home	btrfs	defaults	0	0
+...
+
+On redémarre
+# reboot
+On ne se connecte pas quand on arrive sur la fenêtre de connection
+On passe sur la console avec Ctrl + F1
+On repasse en :
+# init 3
+
+8 - On vérifie que le /home est bien sur la partition /dev/sda3
+# lsblk
+
+9 - On va dans le répertoire /home qui est vide
+# cd /home
+On déplace l'archive qui est à la racine / dans /home
+# mv /users.tar .
+On désarchive
+# tar xf users.tar
+On vérifie que le dossiers du ou des utilisateurs ont les bons droits :
+# drwxr-xr-x 92 <utilisateur> <utilisateur> 4,0K déc.  19 18:19 <utilisateur>
+On Vérifie que nos répertoires et fichiers sont bien là :
+# ls <utililisateur>
+On supprime l'archive
+# rm users.tar
+
+11 - On revient vers la fenêtre de connection :
+Ctrl + F7 sur VirtualBox
+On repasse en :
+# init 5
+On se connecte en simple utilisateur.
+
+12 - On doit retrouver son environnement de bureau et nos données en place.
+
+########
+# Note :
+########
+
+La commande df ne prends pas en compte la modication :
+
+Filesystem     Type      Size  Used Avail Use% Mounted on
+/dev/sda2      btrfs      28G  3,7G   23G  15% /
+tmpfs          tmpfs     999M  640K  998M   1% /run
+devtmpfs       devtmpfs  996M     0  996M   0% /dev
+/dev/sda3      btrfs      16G   60M   14G   1% /home
+
+Par conte la commade lsblk voit bien la partition :
+
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 29,7G  0 disk 
+├─sda1   8:1    0    2G  0 part [SWAP]
+├─sda2   8:2    0   12G  0 part /
+└─sda3   8:3    0 15,7G  0 part /home
+sr0     11:0    1 1024M  0 rom  

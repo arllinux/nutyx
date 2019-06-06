@@ -32,6 +32,9 @@ else
          alias up='sudo cards install -u'
          alias check='sudo cards sync;sudo cards diff'
 fi
+shopt -s histappend
+HISTFILE='/root/.bash_history'
+
 # alias search='cards search'
 # alias ll='ls -l'
 # alias l='ls -alh'

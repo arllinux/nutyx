@@ -1,0 +1,12 @@
+Ajout des archives comptessées disponible dans sloteur.free.fr
+pref_thunderbird.tar.gz Fait
+pref_firefox.tar.gz Fait
+dconf.tar.gz Fait
+fonds_arllinux.tar.gz (cette partie du script est faite). Fait
+
+Les archives dconf, firefox et thunderbird sont téléchargées à partir de
+mon Rapberry pi = 80.240.4.59 ==> script : 03_param_nutyx10.sh
+
+Le 22 janvier 2018
+Les fichiers .desktop de Firefox et Clementine ne sont pas \
+correctement traduit.

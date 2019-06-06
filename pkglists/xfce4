@@ -1,0 +1,15 @@
+# Pour l'installation de la 10.0 xorg.
+# Dès l'installation de base terminée.
+# Xfce
+xfce4
+xfce4-extra
+lxdm
+wget
+zip
+unzip
+tar
+rsync
+xdg-user-dirs
+gvfs
+alsa-utils
+network-manager-applet

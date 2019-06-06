@@ -158,19 +158,19 @@ EOF
 
 Synchronisation des binaires via rsync
 
-    La branche stable
-    La branche development 
+    La branche fixed
+    La branche rolling
 "chroot"
 # mkdir /usr/ports/perso
  for i in base cli gui
   do
-    rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/development/$i/ \
+    rsync -avz --delete-after rsync://downloads.nutyx.org/nutyx/`uname -m`/rolling/$i/ \
   /usr/ports/$i/
   done
 
 
 "Machine hôte"
-J'ai préparé en amont dans la machine hôte un fichier texte qui contient la recette de scribus 1.4.6
+J'ai préparé en amont dans la machine hôte un fichier texte qui contient la recette de scribus 1.4.7
 Dans le répertoire /home/jpantinoux/Documents/scribus/
 Ce répertoire contient un fichier texte :
 J'ai fait un copier du contenu récupéré sur le site NuTyx de Scribus 1.4.6
@@ -181,9 +181,9 @@ Contenu du fichier :
 
 description="Desktop publishing software"
 url="http://www.scribus.net"
-packager="pierre at nutyx dot org, tnut at nutyx dot org"
+packager="Jean-Pierre Antinoux"
 name=scribus
-version=1.4.6
+version=1.4.7
 release=1
 
 source=(http://downloads.sourceforge.net/$name/$name-$version.tar.xz)
@@ -218,9 +218,12 @@ Je déplace le répertoire "scribus" dans la chroot
 
 Vérification de la disponibilité des ports sur la machine "hôte"
 Avec l'option "-p" pour "ports"
+# cards info scribus -p
+
 puis
 Vérification de la disponibilité des ports sur le serveur
 Avec l'option "-b" pour binaire
+# cards info scribus -b
 
 "Machine hôte"
 Vérification de la disponibilité des ports sur la machine "hôte"
@@ -228,36 +231,17 @@ $ cards info -p scribus
 Name           : scribus
 Description    : "Desktop publishing software"
 URL            : "http://www.scribus.net"
-Version        : 1.4.6
+Version        : 1.4.7
 Release        : 1
 Maintainer     : 
 Contributors   : 
-Packager       : "pierre at nutyx dot org, tnut at nutyx dot org"
+Packager       : "Jean-Pierre Antinoux"
 Date of Pkgfile: dim. 14 janv. 2018 00:06:15 CET
 Local Directory: /mnt/hd/usr/ports/perso
 
 
-"Machine hôte"
-Vérification de la disponibilité des ports sur le serveur
-$ cards info -b scribus
-Name           : scribus
-Alias          : 
-Description    : Desktop publishing software
-Group          : doc man scribus 
-URL            : http://www.scribus.net
-Version        : 1.5.3
-Release        : 3
-Maintainer     : n.a.
-Contributors   : Pierre B
-Packager       : tnut <tnut@nutyx.org>
-Build date     : sam. 16 déc. 2017 00:33:12 CET
-Binary Url     : http://downloads.nutyx.org/x86_64/10.0-rc1/gui-extra
-Local Directory: /var/lib/pkg/depot/gui-extra
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Manque la commande pour la liste ci-dessous !!
 ==============================================
+
 "chroot"
 Vérification : Il faut que cards voit tous les ports.
 Quand on lance la commande suivante il ne doit pas apparaître de "warning"

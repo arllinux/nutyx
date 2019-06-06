@@ -1,4 +1,4 @@
 #!/bin/bash
 # Passer sur la branche master
 
-git checkout master
+git checkout development
